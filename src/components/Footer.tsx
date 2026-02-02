@@ -8,9 +8,10 @@ export const Footer = () => {
       <div className="container-narrow">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-lg font-bold">
-              <span className="gradient-text">Dev</span>
-              <span className="text-foreground">Portfolio</span>
+            <span className="text-lg font-bold font-mono">
+              <span className="text-muted-foreground">&lt;</span>
+              <span className="text-primary">Aridev</span>
+              <span className="text-muted-foreground"> /&gt;</span>
             </span>
           </div>
 
