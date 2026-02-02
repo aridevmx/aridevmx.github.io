@@ -33,9 +33,10 @@ export const Navbar = () => {
       }`}
     >
       <nav className="container-narrow flex items-center justify-between">
-        <a href="#" className="text-xl font-bold tracking-tight">
-          <span className="gradient-text">Dev</span>
-          <span className="text-foreground">Portfolio</span>
+        <a href="#" className="text-xl font-bold tracking-tight font-mono">
+          <span className="text-muted-foreground">&lt;</span>
+          <span className="text-primary">Aridev</span>
+          <span className="text-muted-foreground"> /&gt;</span>
         </a>
 
         {/* Desktop Navigation */}
