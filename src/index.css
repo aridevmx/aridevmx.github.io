@@ -15,42 +15,43 @@
     --popover: 220 15% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 160 84% 39%;
+    --primary: 270 95% 65%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 15% 12%;
+    --secondary: 240 20% 12%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 240 15% 15%;
+    --muted-foreground: 240 10% 55%;
 
-    --accent: 160 84% 39%;
+    --accent: 280 100% 70%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 18%;
-    --input: 220 15% 18%;
-    --ring: 160 84% 39%;
+    --border: 260 30% 20%;
+    --input: 260 20% 18%;
+    --ring: 270 95% 65%;
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(160 84% 39%) 0%, hsl(180 70% 35%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(220 15% 10%) 0%, hsl(220 15% 6%) 100%);
-    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(160 84% 39% / 0.15), transparent);
-    --shadow-glow: 0 0 60px -15px hsl(160 84% 39% / 0.4);
-    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.5);
+    /* Custom tokens - Cyberpunk/Gaming aesthetic */
+    --gradient-primary: linear-gradient(135deg, hsl(270 95% 65%) 0%, hsl(320 100% 60%) 50%, hsl(200 100% 60%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(260 30% 12%) 0%, hsl(240 20% 6%) 100%);
+    --gradient-hero: radial-gradient(ellipse 80% 50% at 50% -20%, hsl(270 95% 65% / 0.2), hsl(320 100% 60% / 0.1), transparent);
+    --shadow-glow: 0 0 80px -15px hsl(270 95% 65% / 0.5);
+    --shadow-card: 0 4px 24px -4px hsl(270 50% 10% / 0.6);
+    --neon-glow: 0 0 20px hsl(270 95% 65% / 0.6), 0 0 40px hsl(270 95% 65% / 0.3);
 
-    --sidebar-background: 220 15% 8%;
+    --sidebar-background: 240 20% 8%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 160 84% 39%;
+    --sidebar-primary: 270 95% 65%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent: 260 20% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 220 15% 18%;
-    --sidebar-ring: 160 84% 39%;
+    --sidebar-border: 260 30% 20%;
+    --sidebar-ring: 270 95% 65%;
   }
 
   .dark {
