@@ -3,23 +3,77 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const technologies = [
-  { name: "HTML5", category: "Core" },
-  { name: "CSS/SCSS", category: "Core" },
-  { name: "JavaScript", category: "Core" },
-  { name: "TypeScript", category: "Core" },
-  { name: "React", category: "Framework" },
-  { name: "Vue.js", category: "Framework" },
-  { name: "WordPress", category: "CMS" },
-  { name: "WooCommerce", category: "E-commerce" },
-  { name: "Shopify", category: "E-commerce" },
-  { name: "PHP", category: "Backend" },
-  { name: "REST APIs", category: "Backend" },
-  { name: "Git", category: "Tools" },
-  { name: "Tailwind CSS", category: "UI" },
-  { name: "Figma", category: "Design" },
+  { 
+    name: "HTML5", 
+    category: "Core",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+  },
+  { 
+    name: "CSS/SCSS", 
+    category: "Core",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+  },
+  { 
+    name: "JavaScript", 
+    category: "Core",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+  },
+  { 
+    name: "TypeScript", 
+    category: "Core",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+  },
+  { 
+    name: "React", 
+    category: "Framework",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+  },
+  { 
+    name: "Vue.js", 
+    category: "Framework",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+  },
+  { 
+    name: "WordPress", 
+    category: "CMS",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg"
+  },
+  { 
+    name: "WooCommerce", 
+    category: "E-commerce",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/woocommerce/woocommerce-original.svg"
+  },
+  { 
+    name: "Shopify", 
+    category: "E-commerce",
+    logo: "https://cdn.simpleicons.org/shopify/7AB55C"
+  },
+  { 
+    name: "PHP", 
+    category: "Backend",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
+  },
+  { 
+    name: "REST APIs", 
+    category: "Backend",
+    logo: "https://cdn.simpleicons.org/fastapi/009688"
+  },
+  { 
+    name: "Git", 
+    category: "Tools",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+  },
+  { 
+    name: "Tailwind CSS", 
+    category: "UI",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+  },
+  { 
+    name: "Figma", 
+    category: "Design",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
+  },
 ];
-
-const categories = ["Core", "Framework", "CMS", "E-commerce", "Backend", "Tools", "UI", "Design"];
 
 export const TechStack = () => {
   const ref = useRef(null);
@@ -60,12 +114,17 @@ export const TechStack = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="glass-card px-5 py-3 rounded-xl hover-lift cursor-default group"
+              className="glass-card px-5 py-3 rounded-xl hover-lift cursor-default group flex items-center gap-3"
             >
+              <img 
+                src={tech.logo} 
+                alt={`${tech.name} logo`}
+                className="w-6 h-6 object-contain"
+              />
               <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                 {tech.name}
               </span>
-              <span className="text-xs text-muted-foreground ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
                 {tech.category}
               </span>
             </motion.div>
