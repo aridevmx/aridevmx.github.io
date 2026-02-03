@@ -2,6 +2,10 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, FreeMode } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
 
 const technologies = [
   { 
@@ -102,34 +106,43 @@ export const TechStack = () => {
           </p>
         </motion.div>
 
-        {/* Tech grid */}
+        {/* Tech Swiper Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3"
         >
-          {technologies.map((tech, index) => (
-            <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="glass-card px-5 py-3 rounded-xl hover-lift cursor-default group flex items-center gap-3"
-            >
-              <img 
-                src={tech.logo} 
-                alt={`${tech.name} logo`}
-                className="w-6 h-6 object-contain"
-              />
-              <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                {tech.name}
-              </span>
-              <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                {tech.category}
-              </span>
-            </motion.div>
-          ))}
+          <Swiper
+            modules={[Autoplay, FreeMode]}
+            spaceBetween={16}
+            slidesPerView="auto"
+            freeMode={true}
+            loop={true}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+            }}
+            speed={3000}
+            className="tech-swiper"
+          >
+            {technologies.map((tech) => (
+              <SwiperSlide key={tech.name} className="!w-auto">
+                <div className="glass-card px-5 py-3 rounded-xl hover-lift cursor-default group flex items-center gap-3">
+                  <img 
+                    src={tech.logo} 
+                    alt={`${tech.name} logo`}
+                    className="w-6 h-6 object-contain"
+                  />
+                  <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                    {tech.name}
+                  </span>
+                  <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                    {tech.category}
+                  </span>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </motion.div>
 
         {/* Additional info */}
