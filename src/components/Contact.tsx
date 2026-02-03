@@ -6,12 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { t, language } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,8 +23,8 @@ export const Contact = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
     toast({
-      title: "Mensaje enviado",
-      description: "Te responderé lo antes posible. ¡Gracias por contactarme!",
+      title: t("contact.success"),
+      description: t("contact.success.desc"),
     });
     
     setIsSubmitting(false);
@@ -47,6 +49,18 @@ export const Contact = () => {
     },
   ];
 
+  const benefits = language === "es" 
+    ? [
+        "Respuesta en menos de 24 horas",
+        "Primera consulta sin costo",
+        "Propuesta detallada con timeline",
+      ]
+    : [
+        "Response within 24 hours",
+        "Free initial consultation",
+        "Detailed proposal with timeline",
+      ];
+
   return (
     <section id="contact" className="section-padding bg-secondary/30" ref={ref}>
       <div className="container-narrow">
@@ -58,24 +72,19 @@ export const Contact = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-primary text-sm font-medium uppercase tracking-widest">
-              Contacto
+              {t("contact.label")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-6">
-              ¿Listo para llevar tu proyecto al{" "}
-              <span className="gradient-text">siguiente nivel?</span>
+              {t("contact.title")}{" "}
+              <span className="gradient-text">{t("contact.title.highlight")}</span>
             </h2>
             <p className="text-muted-foreground mb-8">
-              Cuéntame sobre tu proyecto y te responderé en menos de 24 horas. 
-              Podemos agendar una llamada para discutir los detalles y ver cómo puedo ayudarte.
+              {t("contact.subtitle")}
             </p>
 
             {/* Quick benefits */}
             <div className="space-y-3 mb-8">
-              {[
-                "Respuesta en menos de 24 horas",
-                "Primera consulta sin costo",
-                "Propuesta detallada con timeline",
-              ].map((benefit, index) => (
+              {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <ArrowRight className="h-4 w-4 text-primary" />
                   <span className="text-sm text-foreground/80">{benefit}</span>
@@ -114,13 +123,13 @@ export const Contact = () => {
                       htmlFor="name"
                       className="block text-sm font-medium mb-2"
                     >
-                      Nombre
+                      {t("contact.name")}
                     </label>
                     <Input
                       id="name"
                       name="name"
                       required
-                      placeholder="Tu nombre"
+                      placeholder={language === "es" ? "Tu nombre" : "Your name"}
                       className="bg-background/50"
                     />
                   </div>
@@ -129,14 +138,14 @@ export const Contact = () => {
                       htmlFor="email"
                       className="block text-sm font-medium mb-2"
                     >
-                      Email
+                      {t("contact.email")}
                     </label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       required
-                      placeholder="tu@email.com"
+                      placeholder={language === "es" ? "tu@email.com" : "your@email.com"}
                       className="bg-background/50"
                     />
                   </div>
@@ -147,12 +156,12 @@ export const Contact = () => {
                     htmlFor="company"
                     className="block text-sm font-medium mb-2"
                   >
-                    Empresa (opcional)
+                    {language === "es" ? "Empresa (opcional)" : "Company (optional)"}
                   </label>
                   <Input
                     id="company"
                     name="company"
-                    placeholder="Tu empresa o agencia"
+                    placeholder={language === "es" ? "Tu empresa o agencia" : "Your company or agency"}
                     className="bg-background/50"
                   />
                 </div>
@@ -162,13 +171,15 @@ export const Contact = () => {
                     htmlFor="project"
                     className="block text-sm font-medium mb-2"
                   >
-                    Cuéntame sobre tu proyecto
+                    {t("contact.message")}
                   </label>
                   <Textarea
                     id="project"
                     name="project"
                     required
-                    placeholder="Describe brevemente qué necesitas: tipo de proyecto, plazos, tecnologías preferidas..."
+                    placeholder={language === "es" 
+                      ? "Describe brevemente qué necesitas: tipo de proyecto, plazos, tecnologías preferidas..." 
+                      : "Briefly describe what you need: project type, deadlines, preferred technologies..."}
                     rows={5}
                     className="bg-background/50 resize-none"
                   />
@@ -181,10 +192,10 @@ export const Contact = () => {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    "Enviando..."
+                    language === "es" ? "Enviando..." : "Sending..."
                   ) : (
                     <>
-                      Enviar mensaje
+                      {t("contact.send")}
                       <Send className="ml-2 h-4 w-4" />
                     </>
                   )}

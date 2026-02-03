@@ -2,28 +2,30 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Zap, TrendingUp, Code2 } from "lucide-react";
-
-const highlights = [
-  {
-    icon: Zap,
-    title: "Performance First",
-    description: "Sitios que cargan rápido y rankean mejor en buscadores.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Orientado a Conversión",
-    description: "Interfaces diseñadas para guiar usuarios hacia la acción.",
-  },
-  {
-    icon: Code2,
-    title: "Código Mantenible",
-    description: "Arquitectura limpia que facilita iteraciones futuras.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+
+  const highlights = [
+    {
+      icon: Zap,
+      title: t("about.highlight1.title"),
+      description: t("about.highlight1.desc"),
+    },
+    {
+      icon: TrendingUp,
+      title: t("about.highlight2.title"),
+      description: t("about.highlight2.desc"),
+    },
+    {
+      icon: Code2,
+      title: t("about.highlight3.title"),
+      description: t("about.highlight3.desc"),
+    },
+  ];
 
   return (
     <section id="about" className="section-padding" ref={ref}>
@@ -37,27 +39,16 @@ export const About = () => {
           {/* Text content */}
           <div>
             <span className="text-primary text-sm font-medium uppercase tracking-widest">
-              Sobre mí
+              {t("about.label")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-6">
-              Desarrollo web con{" "}
-              <span className="gradient-text">enfoque estratégico</span>
+              {t("about.title")}{" "}
+              <span className="gradient-text">{t("about.title.highlight")}</span>
             </h2>
             <div className="space-y-4 text-muted-foreground">
-              <p>
-                Soy un Frontend Developer con más de 5 años de experiencia construyendo 
-                productos web para agencias de marketing digital y empresas en crecimiento.
-              </p>
-              <p>
-                Mi especialidad es transformar diseños en experiencias web funcionales 
-                y optimizadas: desde sitios corporativos y tiendas e-commerce hasta 
-                herramientas internas que automatizan procesos y ahorran horas de trabajo.
-              </p>
-              <p>
-                Trabajo con equipos de diseño, marketing y negocio para asegurar que 
-                cada línea de código tenga un propósito claro y contribuya a los 
-                objetivos del proyecto.
-              </p>
+              <p>{t("about.p1")}</p>
+              <p>{t("about.p2")}</p>
+              <p>{t("about.p3")}</p>
             </div>
           </div>
 

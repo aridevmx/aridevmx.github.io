@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient effect */}
@@ -29,20 +32,19 @@ export const Hero = () => {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 bg-secondary/50 text-sm text-muted-foreground mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Disponible para nuevos proyectos
+            {t("hero.badge")}
           </motion.div>
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
-            Desarrollo frontend que{" "}
-            <span className="gradient-text">impulsa resultados</span>{" "}
-            de negocio
+            {t("hero.headline")}{" "}
+            <span className="gradient-text">{t("hero.headline.highlight")}</span>{" "}
+            {t("hero.headline.end")}
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-balance">
-            Especializado en crear experiencias web de alto rendimiento que convierten visitantes en clientes. 
-            WordPress, Shopify, React y herramientas internas para agencias y productos digitales.
+            {t("hero.subheadline")}
           </p>
 
           {/* CTAs */}
@@ -54,12 +56,12 @@ export const Hero = () => {
           >
             <Button size="lg" asChild className="group">
               <a href="#contact">
-                Hablemos de tu proyecto
+                {t("hero.cta.primary")}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href="#projects">Ver proyectos</a>
+              <a href="#projects">{t("hero.cta.secondary")}</a>
             </Button>
           </motion.div>
 
@@ -71,9 +73,9 @@ export const Hero = () => {
             className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/50"
           >
             {[
-              { value: "5+", label: "Años de experiencia" },
-              { value: "50+", label: "Proyectos entregados" },
-              { value: "99%", label: "Clientes satisfechos" },
+              { value: "5+", label: t("hero.stats.years") },
+              { value: "50+", label: t("hero.stats.projects") },
+              { value: "99%", label: t("hero.stats.clients") },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold gradient-text">
@@ -98,7 +100,7 @@ export const Hero = () => {
             href="#about"
             className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
+            <span className="text-xs uppercase tracking-widest">{t("hero.scroll")}</span>
             <ChevronDown className="h-5 w-5 animate-bounce" />
           </a>
         </motion.div>

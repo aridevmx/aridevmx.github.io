@@ -2,49 +2,48 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Layout, ShoppingCart, Settings } from "lucide-react";
-
-const services = [
-  {
-    icon: Layout,
-    title: "Frontend para Productos Web",
-    description:
-      "Desarrollo de interfaces modernas y escalables con React y Vue. Componentes reutilizables, testing y documentación para equipos de producto.",
-    features: [
-      "Arquitectura de componentes",
-      "Design systems",
-      "Performance optimization",
-      "Integración con APIs",
-    ],
-  },
-  {
-    icon: ShoppingCart,
-    title: "WordPress, WooCommerce & Shopify",
-    description:
-      "Tiendas online y sitios corporativos listos para producción. Temas custom, plugins personalizados y optimización para conversión.",
-    features: [
-      "Temas personalizados",
-      "Integración de pasarelas de pago",
-      "Optimización de checkout",
-      "Migraciones de plataforma",
-    ],
-  },
-  {
-    icon: Settings,
-    title: "Automatización y Herramientas Internas",
-    description:
-      "Dashboards, paneles de administración y herramientas que automatizan procesos repetitivos y mejoran la eficiencia operativa.",
-    features: [
-      "Dashboards personalizados",
-      "Integración de APIs",
-      "Automatización de reportes",
-      "Sistemas de gestión interna",
-    ],
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Services = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: Layout,
+      title: t("services.1.title"),
+      description: t("services.1.desc"),
+      features: [
+        t("services.1.f1"),
+        t("services.1.f2"),
+        t("services.1.f3"),
+        t("services.1.f4"),
+      ],
+    },
+    {
+      icon: ShoppingCart,
+      title: t("services.2.title"),
+      description: t("services.2.desc"),
+      features: [
+        t("services.2.f1"),
+        t("services.2.f2"),
+        t("services.2.f3"),
+        t("services.2.f4"),
+      ],
+    },
+    {
+      icon: Settings,
+      title: t("services.3.title"),
+      description: t("services.3.desc"),
+      features: [
+        t("services.3.f1"),
+        t("services.3.f2"),
+        t("services.3.f3"),
+        t("services.3.f4"),
+      ],
+    },
+  ];
 
   return (
     <section id="services" className="section-padding bg-secondary/30" ref={ref}>
@@ -56,15 +55,14 @@ export const Services = () => {
           className="text-center mb-16"
         >
           <span className="text-primary text-sm font-medium uppercase tracking-widest">
-            Servicios
+            {t("services.label")}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-4">
-            Soluciones adaptadas a tu{" "}
-            <span className="gradient-text">modelo de negocio</span>
+            {t("services.title")}{" "}
+            <span className="gradient-text">{t("services.title.highlight")}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Desde landing pages de alta conversión hasta plataformas e-commerce completas, 
-            cada proyecto se construye con un objetivo claro en mente.
+            {t("services.subtitle")}
           </p>
         </motion.div>
 

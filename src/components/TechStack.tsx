@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const technologies = [
   { 
@@ -78,6 +79,7 @@ const technologies = [
 export const TechStack = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
 
   return (
     <section id="stack" className="section-padding bg-secondary/30" ref={ref}>
@@ -89,15 +91,14 @@ export const TechStack = () => {
           className="text-center mb-16"
         >
           <span className="text-primary text-sm font-medium uppercase tracking-widest">
-            Stack Tecnológico
+            {t("tech.label")}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-4">
-            Herramientas que uso{" "}
-            <span className="gradient-text">a diario</span>
+            {t("tech.title")}{" "}
+            <span className="gradient-text">{t("tech.title.highlight")}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Stack versátil que me permite adaptarme a diferentes tipos de proyectos 
-            y entregar soluciones eficientes.
+            {t("tech.subtitle")}
           </p>
         </motion.div>
 
@@ -139,7 +140,7 @@ export const TechStack = () => {
           className="mt-12 text-center text-muted-foreground text-sm"
         >
           <p>
-            + experiencia con Node.js, MySQL, PostgreSQL, Docker, CI/CD y metodologías ágiles
+            + Node.js, MySQL, PostgreSQL, Docker, CI/CD
           </p>
         </motion.div>
       </div>
