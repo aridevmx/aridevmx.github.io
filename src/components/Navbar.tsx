@@ -2,18 +2,21 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const navLinks = [
-  { href: "#about", label: "Sobre mí" },
-  { href: "#services", label: "Servicios" },
-  { href: "#projects", label: "Proyectos" },
-  { href: "#stack", label: "Stack" },
-  { href: "#process", label: "Proceso" },
-];
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "#about", label: t("nav.about") },
+    { href: "#services", label: t("nav.services") },
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#stack", label: "Stack" },
+    { href: "#process", label: t("nav.process") },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,9 +56,10 @@ export const Navbar = () => {
           ))}
         </ul>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-2">
+          <LanguageSwitcher />
           <Button asChild>
-            <a href="#contact">Contactar</a>
+            <a href="#contact">{t("nav.contact")}</a>
           </Button>
         </div>
 
@@ -89,10 +93,11 @@ export const Navbar = () => {
                 </a>
               </li>
             ))}
-            <li className="pt-2">
-              <Button asChild className="w-full">
+            <li className="pt-2 flex items-center justify-between">
+              <LanguageSwitcher />
+              <Button asChild>
                 <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  Contactar
+                  {t("nav.contact")}
                 </a>
               </Button>
             </li>

@@ -1,7 +1,9 @@
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="border-t border-border/50 py-8">
@@ -16,7 +18,7 @@ export const Footer = () => {
           </div>
 
           <p className="text-sm text-muted-foreground text-center">
-            © {currentYear} · Construido con React + Tailwind
+            © {currentYear} · {t("footer.rights")}
           </p>
 
           <div className="flex items-center gap-4">

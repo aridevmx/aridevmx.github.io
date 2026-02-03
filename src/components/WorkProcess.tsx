@@ -2,41 +2,39 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { MessageSquare, Lightbulb, Code, Rocket } from "lucide-react";
-
-const steps = [
-  {
-    icon: MessageSquare,
-    title: "Discovery",
-    description:
-      "Entiendo tu negocio, objetivos y restricciones. Defino el alcance técnico y propongo la mejor arquitectura para el proyecto.",
-    details: ["Análisis de requerimientos", "Definición de KPIs", "Propuesta técnica"],
-  },
-  {
-    icon: Lightbulb,
-    title: "Planificación",
-    description:
-      "Coordino con diseño y stakeholders para asegurar que el desarrollo se alinee con la visión del producto.",
-    details: ["Review de diseños", "Estimación de sprints", "Setup del proyecto"],
-  },
-  {
-    icon: Code,
-    title: "Desarrollo",
-    description:
-      "Desarrollo iterativo con entregas frecuentes. Cada sprint tiene objetivos claros y demos para validar avance.",
-    details: ["Sprints de 1-2 semanas", "Code reviews", "Testing continuo"],
-  },
-  {
-    icon: Rocket,
-    title: "Entrega y Soporte",
-    description:
-      "Deployment a producción con documentación completa. Soporte post-lanzamiento para resolver issues y optimizar.",
-    details: ["Deploy a producción", "Documentación técnica", "Soporte post-launch"],
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const WorkProcess = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+
+  const steps = [
+    {
+      icon: MessageSquare,
+      title: t("process.1.title"),
+      description: t("process.1.desc"),
+      details: [t("process.1.d1"), t("process.1.d2"), t("process.1.d3")],
+    },
+    {
+      icon: Lightbulb,
+      title: t("process.2.title"),
+      description: t("process.2.desc"),
+      details: [t("process.2.d1"), t("process.2.d2"), t("process.2.d3")],
+    },
+    {
+      icon: Code,
+      title: t("process.3.title"),
+      description: t("process.3.desc"),
+      details: [t("process.3.d1"), t("process.3.d2"), t("process.3.d3")],
+    },
+    {
+      icon: Rocket,
+      title: t("process.4.title"),
+      description: t("process.4.desc"),
+      details: [t("process.4.d1"), t("process.4.d2"), t("process.4.d3")],
+    },
+  ];
 
   return (
     <section id="process" className="section-padding" ref={ref}>
@@ -48,15 +46,14 @@ export const WorkProcess = () => {
           className="text-center mb-16"
         >
           <span className="text-primary text-sm font-medium uppercase tracking-widest">
-            Proceso de Trabajo
+            {t("process.label")}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-4">
-            Cómo colaboro con{" "}
-            <span className="gradient-text">equipos y clientes</span>
+            {t("process.title")}{" "}
+            <span className="gradient-text">{t("process.title.highlight")}</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Proceso estructurado pero flexible, adaptado a la metodología de cada 
-            equipo: agencias, startups o equipos de producto.
+            {t("process.subtitle")}
           </p>
         </motion.div>
 
