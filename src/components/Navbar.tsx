@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -58,6 +58,11 @@ export const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-2">
           <LanguageSwitcher />
+          <Button variant="ghost" size="icon" asChild aria-label="Ver CV">
+            <a href="/resume" target="_blank" rel="noopener noreferrer">
+              <FileText className="h-5 w-5" />
+            </a>
+          </Button>
           <Button asChild>
             <a href="#contact">{t("nav.contact")}</a>
           </Button>
@@ -95,11 +100,18 @@ export const Navbar = () => {
             ))}
             <li className="pt-2 flex items-center justify-between">
               <LanguageSwitcher />
-              <Button asChild>
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  {t("nav.contact")}
-                </a>
-              </Button>
+              <div className="flex gap-2">
+                <Button variant="ghost" size="icon" asChild aria-label="Ver CV">
+                  <a href="/resume" target="_blank" rel="noopener noreferrer">
+                    <FileText className="h-5 w-5" />
+                  </a>
+                </Button>
+                <Button asChild>
+                  <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+                    {t("nav.contact")}
+                  </a>
+                </Button>
+              </div>
             </li>
           </ul>
         </motion.div>
