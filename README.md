@@ -1,73 +1,56 @@
-# Welcome to your Lovable project
 
-## Project info
+# Ariel Fernando Loza Menodza  
+**Frontend / Web Developer**  
+Guadalajara, MX · ariellozam.dev@gmail.com · +52 33 1115 3802  
+Portfolio: https://aridev.mx · GitHub: https://github.com/aridevmx · LinkedIn: https://linkedin.com/in/aridevmx 
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Perfil Profesional  
+Frontend Developer orientado a producto, con experiencia en agencias digitales y desarrollo de soluciones web en producción. Especializado en la construcción de interfaces performantes y mantenibles, con trabajo real en WordPress, WooCommerce y Shopify. He liderado y colaborado en proyectos web end-to-end, integrando APIs, optimizando performance y brindando soporte técnico post-lanzamiento. Enfocado en generar impacto en negocio: conversión, estabilidad y escalabilidad.
 
-## How can I edit this code?
+## Experiencia Profesional  
 
-There are several ways of editing your application.
+### Timbal — Frontend Developer & Project Manager  
+**Jun 2023 – Actualidad**  
+- Lideré la entrega de proyectos web para clientes de agencia: landings, sitios corporativos y plataformas web.  
+- Desarrollo y mantenimiento de sitios en WordPress, integraciones con APIs y mejoras de performance.  
+- Coordinación con diseño, copywriting y cuentas para asegurar entregables alineados a objetivos de marketing.  
+- Soporte técnico post-lanzamiento y mantenimiento de proyectos en producción.  
+- Implementación de stacks modernos (Vue, Nuxt, Next) para soluciones web escalables.
 
-**Use Lovable**
+### IT Nora — Frontend Developer  
+**Jul 2022 – Jun 2023**  
+- Desarrollo de aplicaciones web y mobile con enfoque en experiencia de usuario y rendimiento.  
+- Integración de APIs REST y trabajo colaborativo con backend.  
+- Participación en despliegues y soporte a entornos productivos.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### Applab — Frontend Developer  
+**Jun 2021 – Jul 2022**  
+- Desarrollo de sitios web y aplicaciones para clientes empresariales.  
+- Integración con CMS (Strapi) y consumo de APIs externas.  
+- Colaboración con equipos multidisciplinarios para entrega de soluciones personalizadas.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Proyectos Relevantes  
+- **E-commerce en WordPress/WooCommerce**: desarrollo y personalización de tienda online, optimización de performance y experiencia de usuario.  
+- **Implementaciones en Shopify**: configuración de tiendas, personalización de temas e integraciones básicas.  
+- **Herramientas internas**: aplicaciones web internas para automatizar flujos de trabajo y mejorar la operación diaria del equipo.
 
-**Use your preferred IDE**
+## Habilidades Técnicas  
+- **Frontend:** HTML5, CSS3/SCSS, JavaScript, Vue.js, React, Nuxt.js, Next.js, Tailwind CSS  
+- **CMS & E-commerce:** WordPress, WooCommerce, Shopify  
+- **Backend & APIs:** PHP, Laravel, Node.js, Express, APIs REST  
+- **Infra & DevOps:** cPanel, despliegues básicos, manejo de entornos productivos  
+- **Herramientas:** Git, GitHub, Figma, Google Analytics  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Educación  
+**UNISITE Universidad** — Desarrollo Web & Diseño Gráfico  
+2015 – 2019  
+- Enfoque en UX/UI y diseño para productos digitales.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Idiomas  
+- Español: Nativo  
+- Inglés: Técnico / lectura de documentación
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Información Adicional  
+- Experiencia en colaboración con equipos de marketing digital y agencias.  
+- Enfoque en buenas prácticas, performance web y mantenibilidad de código.  
+- Interés continuo en automatización de procesos y mejora de flujos de trabajo.
