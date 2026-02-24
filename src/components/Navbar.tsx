@@ -12,10 +12,8 @@ export const Navbar = () => {
 
   const navLinks = [
     { href: "#about", label: t("nav.about") },
-    { href: "#services", label: t("nav.services") },
     { href: "#projects", label: t("nav.projects") },
     { href: "#stack", label: "Stack" },
-    { href: "#process", label: t("nav.process") },
   ];
 
   useEffect(() => {

@@ -2,7 +2,7 @@
 # Ariel Fernando Loza Menodza  
 **Frontend / Web Developer**  
 Guadalajara, MX · ariellozam.dev@gmail.com · +52 33 1115 3802  
-Portfolio: https://arielozam.com · GitHub: https://github.com/tuusuario · LinkedIn: https://linkedin.com/in/tuusuario  
+Portfolio: https://aridev.mx · GitHub: https://github.com/aridevmx · LinkedIn: https://linkedin.com/in/aridevmx 
 
 ## Perfil Profesional  
 Frontend Developer orientado a producto, con experiencia en agencias digitales y desarrollo de soluciones web en producción. Especializado en la construcción de interfaces performantes y mantenibles, con trabajo real en WordPress, WooCommerce y Shopify. He liderado y colaborado en proyectos web end-to-end, integrando APIs, optimizando performance y brindando soporte técnico post-lanzamiento. Enfocado en generar impacto en negocio: conversión, estabilidad y escalabilidad.

@@ -2,83 +2,6 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/free-mode";
-
-const technologies = [
-  { 
-    name: "HTML5", 
-    category: "Core",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-  },
-  { 
-    name: "CSS/SCSS", 
-    category: "Core",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-  },
-  { 
-    name: "JavaScript", 
-    category: "Core",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-  },
-  { 
-    name: "TypeScript", 
-    category: "Core",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-  },
-  { 
-    name: "React", 
-    category: "Framework",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-  },
-  { 
-    name: "Vue.js", 
-    category: "Framework",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
-  },
-  { 
-    name: "WordPress", 
-    category: "CMS",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg"
-  },
-  { 
-    name: "WooCommerce", 
-    category: "E-commerce",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/woocommerce/woocommerce-original.svg"
-  },
-  { 
-    name: "Shopify", 
-    category: "E-commerce",
-    logo: "https://cdn.simpleicons.org/shopify/7AB55C"
-  },
-  { 
-    name: "PHP", 
-    category: "Backend",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg"
-  },
-  { 
-    name: "REST APIs", 
-    category: "Backend",
-    logo: "https://cdn.simpleicons.org/fastapi/009688"
-  },
-  { 
-    name: "Git", 
-    category: "Tools",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
-  },
-  { 
-    name: "Tailwind CSS", 
-    category: "UI",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
-  },
-  { 
-    name: "Figma", 
-    category: "Design",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
-  },
-];
 
 export const TechStack = () => {
   const ref = useRef(null);
@@ -106,55 +29,47 @@ export const TechStack = () => {
           </p>
         </motion.div>
 
-        {/* Tech Swiper Carousel */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
+          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
         >
-          <Swiper
-            modules={[Autoplay, FreeMode]}
-            spaceBetween={16}
-            slidesPerView="auto"
-            freeMode={true}
-            loop={true}
-            autoplay={{
-              delay: 0,
-              disableOnInteraction: false,
-            }}
-            speed={3000}
-            className="tech-swiper"
-          >
-            {technologies.map((tech) => (
-              <SwiperSlide key={tech.name} className="!w-auto">
-                <div className="glass-card px-5 py-3 rounded-xl hover-lift cursor-default group flex items-center gap-3">
-                  <img 
-                    src={tech.logo} 
-                    alt={`${tech.name} logo`}
-                    className="w-6 h-6 object-contain"
-                  />
-                  <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                    {tech.name}
-                  </span>
-                  <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-                    {tech.category}
-                  </span>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </motion.div>
-
-        {/* Additional info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-          className="mt-12 text-center text-muted-foreground text-sm"
-        >
-          <p>
-            + Node.js, MySQL, PostgreSQL, Docker, CI/CD
-          </p>
+          <div className="glass-card p-6 rounded-2xl">
+            <h3 className="text-sm font-semibold mb-3 text-primary">Core</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>HTML5</li>
+              <li>CSS/SCSS</li>
+              <li>JavaScript</li>
+              <li>TypeScript</li>
+            </ul>
+          </div>
+          <div className="glass-card p-6 rounded-2xl">
+            <h3 className="text-sm font-semibold mb-3 text-primary">Frameworks</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>React</li>
+              <li>Vue.js</li>
+              <li>Nuxt.js</li>
+              <li>Next.js</li>
+            </ul>
+          </div>
+          <div className="glass-card p-6 rounded-2xl">
+            <h3 className="text-sm font-semibold mb-3 text-primary">CMS / Ecommerce</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>WordPress</li>
+              <li>WooCommerce</li>
+              <li>Shopify</li>
+            </ul>
+          </div>
+          <div className="glass-card p-6 rounded-2xl">
+            <h3 className="text-sm font-semibold mb-3 text-primary">Herramientas</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>Git</li>
+              <li>Figma</li>
+              <li>Tailwind CSS</li>
+              <li>PHP</li>
+            </ul>
+          </div>
         </motion.div>
       </div>
     </section>

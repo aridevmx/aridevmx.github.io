@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { ExternalLink, ArrowUpRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -10,81 +10,119 @@ export const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { t, language } = useLanguage();
 
-  const projects = language === "es" ? [
-    {
-      title: "E-commerce de Moda Premium",
-      category: "Shopify + Custom Theme",
-      problem: "Tienda con alta tasa de abandono de carrito y tiempo de carga superior a 6 segundos.",
-      solution: "Rediseño completo del checkout, optimización de imágenes y lazy loading estratégico.",
-      stack: ["Shopify", "Liquid", "JavaScript", "SCSS"],
-      result: "+40% en tasa de conversión, tiempo de carga reducido a 2.1s",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Dashboard de Analytics Interno",
-      category: "React + APIs",
-      problem: "Equipo de marketing invirtiendo 10+ horas semanales en reportes manuales.",
-      solution: "Dashboard con integración a múltiples fuentes de datos y reportes automatizados.",
-      stack: ["React", "TypeScript", "Recharts", "REST APIs"],
-      result: "Reducción del 80% en tiempo de generación de reportes",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Portal Inmobiliario",
-      category: "WordPress + Custom Plugins",
-      problem: "Sistema de búsqueda limitado que no filtraba correctamente las propiedades.",
-      solution: "Plugin custom con filtros avanzados, mapas interactivos y sistema de favoritos.",
-      stack: ["WordPress", "PHP", "JavaScript", "MySQL"],
-      result: "+65% en engagement, más consultas cualificadas",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Plataforma de Cursos Online",
-      category: "Vue.js + WooCommerce",
-      problem: "Plataforma existente con UX confusa que dificultaba la compra y acceso a cursos.",
-      solution: "Frontend completamente nuevo con Vue.js, manteniendo el backend de WooCommerce.",
-      stack: ["Vue.js", "WooCommerce", "REST API", "Vimeo API"],
-      result: "+120% en ventas de cursos en los primeros 3 meses",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
-    },
-  ] : [
-    {
-      title: "Premium Fashion E-commerce",
-      category: "Shopify + Custom Theme",
-      problem: "Store with high cart abandonment rate and load time over 6 seconds.",
-      solution: "Complete checkout redesign, image optimization and strategic lazy loading.",
-      stack: ["Shopify", "Liquid", "JavaScript", "SCSS"],
-      result: "+40% conversion rate, load time reduced to 2.1s",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Internal Analytics Dashboard",
-      category: "React + APIs",
-      problem: "Marketing team spending 10+ hours weekly on manual reports.",
-      solution: "Dashboard with multi-source data integration and automated reports.",
-      stack: ["React", "TypeScript", "Recharts", "REST APIs"],
-      result: "80% reduction in report generation time",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Real Estate Portal",
-      category: "WordPress + Custom Plugins",
-      problem: "Limited search system that didn't properly filter properties.",
-      solution: "Custom plugin with advanced filters, interactive maps and favorites system.",
-      stack: ["WordPress", "PHP", "JavaScript", "MySQL"],
-      result: "+65% engagement, more qualified inquiries",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-    },
-    {
-      title: "Online Courses Platform",
-      category: "Vue.js + WooCommerce",
-      problem: "Existing platform with confusing UX that hindered course purchase and access.",
-      solution: "Completely new frontend with Vue.js, keeping the WooCommerce backend.",
-      stack: ["Vue.js", "WooCommerce", "REST API", "Vimeo API"],
-      result: "+120% in course sales in the first 3 months",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
-    },
-  ];
+  const projects = language === "es"
+    ? [
+        {
+          title: "E-commerce de Moda Premium",
+          category: "Shopify + Custom Theme",
+          problem: "Tienda con alta tasa de abandono de carrito y tiempo de carga superior a 6 segundos.",
+          solution: "Rediseño completo del checkout, optimización de imágenes y lazy loading estratégico.",
+          stack: ["Shopify", "Liquid", "JavaScript", "SCSS"],
+          result: "+40% en tasa de conversión, tiempo de carga reducido a 2.1s",
+          image:
+            "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+        {
+          title: "Dashboard de Analytics Interno",
+          category: "React + APIs",
+          problem: "Equipo de marketing invirtiendo 10+ horas semanales en reportes manuales.",
+          solution: "Dashboard con integración a múltiples fuentes de datos y reportes automatizados.",
+          stack: ["React", "TypeScript", "Recharts"],
+          result: "Reducción del 80% en tiempo de generación de reportes",
+          image:
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+        {
+          title: "Portal Inmobiliario",
+          category: "WordPress + Custom Plugins",
+          problem: "Sistema de búsqueda limitado que no filtraba correctamente las propiedades.",
+          solution: "Plugin custom con filtros avanzados, mapas interactivos y sistema de favoritos.",
+          stack: ["WordPress", "PHP", "JavaScript", "MySQL"],
+          result: "+65% en engagement, más consultas cualificadas",
+          image:
+            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+        {
+          title: "Plataforma de Cursos Online",
+          category: "Vue.js + WooCommerce",
+          problem: "Plataforma existente con UX confusa que dificultaba la compra y acceso a cursos.",
+          solution:
+            "Frontend completamente nuevo con Vue.js, manteniendo el backend de WooCommerce.",
+          stack: ["Vue.js", "WooCommerce", "REST API", "Vimeo API"],
+          result: "+120% en ventas de cursos en los primeros 3 meses",
+          image:
+            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+      ]
+    : [
+        {
+          title: "Premium Fashion E-commerce",
+          category: "Shopify + Custom Theme",
+          problem: "Store with high cart abandonment rate and load time over 6 seconds.",
+          solution: "Complete checkout redesign, image optimization and strategic lazy loading.",
+          stack: ["Shopify", "Liquid", "JavaScript", "SCSS"],
+          result: "+40% conversion rate, load time reduced to 2.1s",
+          image:
+            "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+        {
+          title: "Internal Analytics Dashboard",
+          category: "React + APIs",
+          problem: "Marketing team spending 10+ hours weekly on manual reports.",
+          solution:
+            "Dashboard with multi-source data integration and automated reports.",
+          stack: ["React", "TypeScript", "Recharts"],
+          result: "80% reduction in report generation time",
+          image:
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+        {
+          title: "Real Estate Portal",
+          category: "WordPress + Custom Plugins",
+          problem: "Limited search system that didn't properly filter properties.",
+          solution:
+            "Custom plugin with advanced filters, interactive maps and favorites system.",
+          stack: ["WordPress", "PHP", "JavaScript", "MySQL"],
+          result: "+65% engagement, more qualified inquiries",
+          image:
+            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+        {
+          title: "Online Courses Platform",
+          category: "Vue.js + WooCommerce",
+          problem:
+            "Existing platform with confusing UX that hindered course purchase and access.",
+          solution: "Completely new frontend with Vue.js, keeping the WooCommerce backend.",
+          stack: ["Vue.js", "WooCommerce", "REST API", "Vimeo API"],
+          result: "+120% in course sales in the first 3 months",
+          image:
+            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
+          githubUrl: null,
+          liveUrl: null,
+          isReal: false,
+        },
+      ];
 
   return (
     <section id="projects" className="section-padding" ref={ref}>
@@ -150,7 +188,6 @@ export const Projects = () => {
                   </div>
                 </div>
 
-                {/* Stack */}
                 <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/50">
                   {project.stack.map((tech, i) => (
                     <span
@@ -161,24 +198,38 @@ export const Projects = () => {
                     </span>
                   ))}
                 </div>
+                {(project.githubUrl || project.liveUrl) && (
+                  <div className="flex flex-wrap gap-3 mt-4">
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button variant="outline" size="sm">
+                          <Github className="h-4 w-4 mr-2" />
+                          {language === "es" ? "Código" : "Code"}
+                        </Button>
+                      </a>
+                    )}
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Button size="sm">
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          {language === "es" ? "Demo" : "Live demo"}
+                        </Button>
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </motion.article>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12"
-        >
-          <Button variant="outline" size="lg" asChild>
-            <a href="#contact">
-              {language === "es" ? "¿Tienes un proyecto similar?" : "Have a similar project?"}
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

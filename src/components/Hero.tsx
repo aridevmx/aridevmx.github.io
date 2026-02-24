@@ -24,7 +24,6 @@ export const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center max-w-4xl mx-auto"
         >
-          {/* Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -35,19 +34,16 @@ export const Hero = () => {
             {t("hero.badge")}
           </motion.div>
 
-          {/* Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
             {t("hero.headline")}{" "}
             <span className="gradient-text">{t("hero.headline.highlight")}</span>{" "}
             {t("hero.headline.end")}
           </h1>
 
-          {/* Subheadline */}
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-balance">
             {t("hero.subheadline")}
           </p>
 
-          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -55,37 +51,16 @@ export const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button size="lg" asChild className="group">
-              <a href="#contact">
+              <a href="#projects">
                 {t("hero.cta.primary")}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href="#projects">{t("hero.cta.secondary")}</a>
+              <a href="/resume">
+                {t("hero.cta.secondary")}
+              </a>
             </Button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-border/50"
-          >
-            {[
-              { value: "5+", label: t("hero.stats.years") },
-              { value: "50+", label: t("hero.stats.projects") },
-              { value: "99%", label: t("hero.stats.clients") },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold gradient-text">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
           </motion.div>
         </motion.div>
 
