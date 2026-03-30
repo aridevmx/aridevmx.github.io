@@ -9,8 +9,8 @@ const Resume = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/cv/aridevmx.md")
-      .then((res) => res.text())
+    fetch(`${import.meta.env.BASE_URL}cv/aridevmx.md`)
+      .then((res) => (res.ok ? res.text() : Promise.reject(new Error(`Resume request failed: ${res.status}`))))
       .then((text) => setContent(text))
       .catch((err) => console.error("Error loading resume:", err));
   }, []);

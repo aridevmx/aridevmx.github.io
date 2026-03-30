@@ -1,0 +1,124 @@
+{
+  "projects": [
+    {
+      "id": "2c8c6f49-5f45-4a84-9a1a-0c0e8f5d1c20",
+      "name": "ERP Commerce",
+      "client": null,
+      "category": "ERP para Empresas de e-Commerce",
+      "summary": {
+        "es": "Optimización de checkout y performance para e-commerce, con mejoras medibles en conversión y tiempos de carga.",
+        "en": "Checkout and performance optimization for e-commerce, with measurable improvements in conversion and load time."
+      },
+      "details": {
+        "es": {
+          "problem": "Tienda con alta tasa de abandono de carrito y tiempo de carga superior a 6 segundos.",
+          "solution": "Rediseño completo del checkout, optimización de imágenes y lazy loading estratégico.",
+          "result": "+40% en tasa de conversión, tiempo de carga reducido a 2.1s"
+        },
+        "en": {
+          "problem": "Store with high cart abandonment rate and load time above 6 seconds.",
+          "solution": "Complete checkout redesign, image optimization and strategic lazy loading.",
+          "result": "+40% conversion rate, load time reduced to 2.1s"
+        }
+      },
+      "technologies": ["Next JS", "Node JS", "Tailwind CSS", "Supabase"],
+      "languages": ["TypeScript", "JavaScript"],
+      "demoUrl": "https://example.com",
+      "githubUrl": null,
+      "status": "delivered",
+      "publishedAt": "2025-01-01",
+      "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
+      "access": null
+    },
+    {
+      "id": "b8f50cf2-0f33-4a2a-9c1f-2d3e1b2f9a73",
+      "name": "Easytasking",
+      "client": null,
+      "category": "Next JS + APIs",
+      "summary": {
+        "es": "Dashboard con integración de datos y reportes automatizados para acelerar decisiones operativas.",
+        "en": "Dashboard with data integrations and automated reporting to speed up operational decisions."
+      },
+      "details": {
+        "es": {
+          "problem": "Las apps de todo mas comunes necesitan simplicidad y funcionalidad.",
+          "solution": "Dashboard con integración a múltiples fuentes de datos y reportes automatizados.",
+          "result": "Reducción del 80% en tiempo de generación de reportes"
+        },
+        "en": {
+          "problem": "Paid to-do apps are great but expensive; free/open alternatives often fall short.",
+          "solution": "Dashboard with multi-source data integration and automated reports.",
+          "result": "80% reduction in report generation time"
+        }
+      },
+      "technologies": ["React", "TypeScript", "Tailwind", "API's"],
+      "languages": ["TypeScript", "JavaScript"],
+      "demoUrl": "https://example.com",
+      "githubUrl": null,
+      "status": "delivered",
+      "publishedAt": "2024-11-01",
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      "access": null
+    },
+    {
+      "id": "0d6d7fe3-7f8c-4f62-b7db-1260c2c9d8a8",
+      "name": "Creators Connect México",
+      "client": null,
+      "category": "SaaS para Creatores de Contenido",
+      "summary": {
+        "es": "Plataforma con búsqueda avanzada y favoritos para conectar creadores con oportunidades, enfocada en el mercado local.",
+        "en": "Platform with advanced search and favorites to connect creators with opportunities, focused on the local market."
+      },
+      "details": {
+        "es": {
+          "problem": "Muchas plataformas son extrangeras y no contemplan a muchos creadores digitales.",
+          "solution": "Plugin custom con filtros avanzados, mapas interactivos y sistema de favoritos.",
+          "result": "+65% en engagement, más consultas cualificadas"
+        },
+        "en": {
+          "problem": "Many platforms are foreign and don’t cover a large part of the local creator ecosystem.",
+          "solution": "Custom plugin with advanced filters, interactive maps and favorites system.",
+          "result": "+65% engagement, more qualified inquiries"
+        }
+      },
+      "technologies": ["WordPress", "PHP", "JavaScript", "MySQL"],
+      "languages": ["PHP", "JavaScript"],
+      "demoUrl": "https://example.com",
+      "githubUrl": null,
+      "status": "delivered",
+      "publishedAt": "2024-06-01",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+      "access": null
+    },
+    {
+      "id": "f5c9fb21-f839-4a91-8b3d-f9a8b33e2c9c",
+      "name": "K-Dash",
+      "client": null,
+      "category": "Next JS + APIs",
+      "summary": {
+        "es": "Interfaz personalizada para CRM con integraciones vía APIs, enfocada en usabilidad y adopción del equipo.",
+        "en": "Custom CRM interface with API integrations, focused on usability and team adoption."
+      },
+      "details": {
+        "es": {
+          "problem": "Kommo CRM no tiene una UI que que se adecue al usuario y que sea facil de manejar.",
+          "solution": "Frontend completamente nuevo con Vue.js, manteniendo el backend de WooCommerce.",
+          "result": "+120% en ventas de cursos en los primeros 3 meses"
+        },
+        "en": {
+          "problem": "Existing platform with confusing UX that hindered course purchase and access.",
+          "solution": "Completely new frontend with Vue.js, keeping the WooCommerce backend.",
+          "result": "+120% in course sales in the first 3 months"
+        }
+      },
+      "technologies": ["Vue.js", "WooCommerce", "REST API", "Vimeo API"],
+      "languages": ["JavaScript"],
+      "demoUrl": "https://example.com",
+      "githubUrl": null,
+      "status": "in_progress",
+      "publishedAt": "2024-02-01",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
+      "access": null
+    }
+  ]
+}

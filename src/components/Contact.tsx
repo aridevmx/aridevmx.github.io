@@ -1,14 +1,23 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useToast } from "@/hooks/use-toast";
 
 export const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { t, language } = useLanguage();
+  const { toast } = useToast();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
 
   const socialLinks = [
     {
@@ -47,7 +56,7 @@ export const Contact = () => {
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold mt-3 mb-6">
             {t("contact.title")}{" "}
-            <span className="gradient-text">{t("contact.title.highlight")}</span>
+           
           </h2>
           <p className="text-muted-foreground mb-8">
             {t("contact.subtitle")}
@@ -70,6 +79,50 @@ export const Contact = () => {
               </a>
             ))}
           </div>
+
+          <form
+            className="mt-10 text-left space-y-4"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              setSending(true);
+              try {
+                const res = await fetch("/api/crm", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ name, email, message }),
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data?.error ?? "Error enviando mensaje");
+                setName("");
+                setEmail("");
+                setMessage("");
+                toast({ title: t("contact.success"), description: t("contact.success.desc") });
+              } catch (err) {
+                const msg = err instanceof Error ? err.message : String(err);
+                toast({ title: "Error", description: msg, variant: "destructive" });
+              } finally {
+                setSending(false);
+              }
+            }}
+          >
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="space-y-2">
+                <div className="text-sm font-medium">{t("contact.name")}</div>
+                <Input value={name} onChange={(e) => setName(e.target.value)} required />
+              </div>
+              <div className="space-y-2">
+                <div className="text-sm font-medium">{t("contact.email")}</div>
+                <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-sm font-medium">{t("contact.message")}</div>
+              <Textarea value={message} onChange={(e) => setMessage(e.target.value)} required rows={6} />
+            </div>
+            <Button type="submit" disabled={sending} className="w-full sm:w-auto">
+              {t("contact.send")}
+            </Button>
+          </form>
         </motion.div>
       </div>
     </section>

@@ -1,128 +1,106 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ExternalLink, ArrowUpRight, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getProjectsForLanguage, type ProjectCardData } from "@/data/projects";
 
 export const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { t, language } = useLanguage();
 
-  const projects = language === "es"
-    ? [
-        {
-          title: "E-commerce de Moda Premium",
-          category: "Shopify + Custom Theme",
-          problem: "Tienda con alta tasa de abandono de carrito y tiempo de carga superior a 6 segundos.",
-          solution: "Rediseño completo del checkout, optimización de imágenes y lazy loading estratégico.",
-          stack: ["Shopify", "Liquid", "JavaScript", "SCSS"],
-          result: "+40% en tasa de conversión, tiempo de carga reducido a 2.1s",
-          image:
-            "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-        {
-          title: "Dashboard de Analytics Interno",
-          category: "React + APIs",
-          problem: "Equipo de marketing invirtiendo 10+ horas semanales en reportes manuales.",
-          solution: "Dashboard con integración a múltiples fuentes de datos y reportes automatizados.",
-          stack: ["React", "TypeScript", "Recharts"],
-          result: "Reducción del 80% en tiempo de generación de reportes",
-          image:
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-        {
-          title: "Portal Inmobiliario",
-          category: "WordPress + Custom Plugins",
-          problem: "Sistema de búsqueda limitado que no filtraba correctamente las propiedades.",
-          solution: "Plugin custom con filtros avanzados, mapas interactivos y sistema de favoritos.",
-          stack: ["WordPress", "PHP", "JavaScript", "MySQL"],
-          result: "+65% en engagement, más consultas cualificadas",
-          image:
-            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-        {
-          title: "Plataforma de Cursos Online",
-          category: "Vue.js + WooCommerce",
-          problem: "Plataforma existente con UX confusa que dificultaba la compra y acceso a cursos.",
-          solution:
-            "Frontend completamente nuevo con Vue.js, manteniendo el backend de WooCommerce.",
-          stack: ["Vue.js", "WooCommerce", "REST API", "Vimeo API"],
-          result: "+120% en ventas de cursos en los primeros 3 meses",
-          image:
-            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-      ]
-    : [
-        {
-          title: "Premium Fashion E-commerce",
-          category: "Shopify + Custom Theme",
-          problem: "Store with high cart abandonment rate and load time over 6 seconds.",
-          solution: "Complete checkout redesign, image optimization and strategic lazy loading.",
-          stack: ["Shopify", "Liquid", "JavaScript", "SCSS"],
-          result: "+40% conversion rate, load time reduced to 2.1s",
-          image:
-            "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-        {
-          title: "Internal Analytics Dashboard",
-          category: "React + APIs",
-          problem: "Marketing team spending 10+ hours weekly on manual reports.",
-          solution:
-            "Dashboard with multi-source data integration and automated reports.",
-          stack: ["React", "TypeScript", "Recharts"],
-          result: "80% reduction in report generation time",
-          image:
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-        {
-          title: "Real Estate Portal",
-          category: "WordPress + Custom Plugins",
-          problem: "Limited search system that didn't properly filter properties.",
-          solution:
-            "Custom plugin with advanced filters, interactive maps and favorites system.",
-          stack: ["WordPress", "PHP", "JavaScript", "MySQL"],
-          result: "+65% engagement, more qualified inquiries",
-          image:
-            "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-        {
-          title: "Online Courses Platform",
-          category: "Vue.js + WooCommerce",
-          problem:
-            "Existing platform with confusing UX that hindered course purchase and access.",
-          solution: "Completely new frontend with Vue.js, keeping the WooCommerce backend.",
-          stack: ["Vue.js", "WooCommerce", "REST API", "Vimeo API"],
-          result: "+120% in course sales in the first 3 months",
-          image:
-            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop",
-          githubUrl: null,
-          liveUrl: null,
-          isReal: false,
-        },
-      ];
+  const [remoteProjects, setRemoteProjects] = useState<ProjectCardData[] | null>(null);
+  const [remoteError, setRemoteError] = useState<string | null>(null);
+
+  let fallbackError: string | null = null;
+  let fallbackProjects: ProjectCardData[] = [];
+  try {
+    fallbackProjects = getProjectsForLanguage(language);
+  } catch (err) {
+    fallbackError = err instanceof Error ? err.message : String(err);
+  }
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const res = await fetch("/api/projects", { method: "GET" });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.error ?? "Error cargando proyectos");
+
+        const asRecord = (value: unknown): Record<string, unknown> | null =>
+          typeof value === "object" && value !== null && !Array.isArray(value) ? (value as Record<string, unknown>) : null;
+
+        const asStringArray = (value: unknown): string[] => {
+          if (!Array.isArray(value)) return [];
+          return value.filter((x): x is string => typeof x === "string").map((x) => x.trim()).filter(Boolean);
+        };
+
+        const projects = Array.isArray(data?.projects) ? (data.projects as unknown[]) : [];
+        const mapped: ProjectCardData[] = projects
+          .map((p) => {
+            const record = asRecord(p);
+            if (!record) return null;
+
+            const id = String(record.id ?? "");
+            const name = String(record.name ?? "");
+            const category = String(record.category ?? "");
+            const publishedAt = String(record.publishedAt ?? "");
+            const image = String(record.image ?? "");
+            const demoUrl = String(record.demoUrl ?? "");
+            const githubUrl = typeof record.githubUrl === "string" ? record.githubUrl : null;
+            const technologies = asStringArray(record.technologies);
+            const languagesList = asStringArray(record.languages);
+            const statusValue = record.status;
+            const status = statusValue === "in_progress" || statusValue === "delivered" ? statusValue : "delivered";
+            const client = typeof record.client === "string" ? record.client : null;
+
+            const summaryRecord = asRecord(record.summary);
+            const summary = language === "es" ? String(summaryRecord?.es ?? "") : String(summaryRecord?.en ?? "");
+
+            const detailsRecord = asRecord(record.details);
+            const localizedDetails = detailsRecord ? asRecord(detailsRecord[language]) : null;
+            const details = localizedDetails ? localizedDetails : undefined;
+
+            if (!id || !name || !category || !summary) return null;
+
+            return {
+              id,
+              name,
+              client,
+              category,
+              summary,
+              details,
+              technologies,
+              languages: languagesList,
+              demoUrl,
+              githubUrl,
+              status,
+              publishedAt,
+              image,
+            } satisfies ProjectCardData;
+          })
+          .filter((x): x is ProjectCardData => x !== null);
+
+        if (!cancelled) {
+          setRemoteProjects(mapped);
+          setRemoteError(null);
+        }
+      } catch (err) {
+        if (!cancelled) setRemoteError(err instanceof Error ? err.message : String(err));
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [language]);
+
+  const projects = remoteProjects ?? fallbackProjects;
+  const projectsError = remoteError ?? fallbackError;
 
   return (
     <section id="projects" className="section-padding" ref={ref}>
@@ -145,10 +123,16 @@ export const Projects = () => {
           </p>
         </motion.div>
 
+        {projectsError && (
+          <div className="mb-8 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            {projectsError}
+          </div>
+        )}
+
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <motion.article
-              key={index}
+              key={project.id}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -170,26 +154,33 @@ export const Projects = () => {
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 group-hover:text-primary transition-colors">
-                  {project.title}
+                  {project.name}
                   <ArrowUpRight className="h-5 w-5 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all" />
                 </h3>
 
                 <div className="space-y-3 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">{language === "es" ? "Problema" : "Problem"}: </span>
-                    <span className="text-foreground/80">{project.problem}</span>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">{language === "es" ? "Solución" : "Solution"}: </span>
-                    <span className="text-foreground/80">{project.solution}</span>
-                  </div>
-                  <div className="pt-2">
-                    <span className="text-primary font-medium">{project.result}</span>
-                  </div>
+                  <p className="text-foreground/80">{project.summary}</p>
+                  {project.details?.problem && (
+                    <div>
+                      <span className="text-muted-foreground">{language === "es" ? "Problema" : "Problem"}: </span>
+                      <span className="text-foreground/80">{project.details.problem}</span>
+                    </div>
+                  )}
+                  {project.details?.solution && (
+                    <div>
+                      <span className="text-muted-foreground">{language === "es" ? "Solución" : "Solution"}: </span>
+                      <span className="text-foreground/80">{project.details.solution}</span>
+                    </div>
+                  )}
+                  {project.details?.result && (
+                    <div className="pt-2">
+                      <span className="text-primary font-medium">{project.details.result}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/50">
-                  {project.stack.map((tech, i) => (
+                  {project.technologies.map((tech, i) => (
                     <span
                       key={i}
                       className="text-xs px-2 py-1 rounded bg-muted text-muted-foreground"
@@ -198,7 +189,7 @@ export const Projects = () => {
                     </span>
                   ))}
                 </div>
-                {(project.githubUrl || project.liveUrl) && (
+                {(project.githubUrl || project.demoUrl) && (
                   <div className="flex flex-wrap gap-3 mt-4">
                     {project.githubUrl && (
                       <a
@@ -212,9 +203,9 @@ export const Projects = () => {
                         </Button>
                       </a>
                     )}
-                    {project.liveUrl && (
+                    {project.demoUrl && (
                       <a
-                        href={project.liveUrl}
+                        href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/cv",
+      "destination": "/resume",
+      "permanent": true
+    },
+    {
+      "source": "/cv/",
+      "destination": "/resume",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/|_next/|static/|cv/|assets/|favicon.ico|robots.txt|sw.js).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

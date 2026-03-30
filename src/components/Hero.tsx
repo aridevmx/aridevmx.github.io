@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 export const Hero = () => {
   const { t } = useLanguage();
@@ -37,7 +38,7 @@ export const Hero = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
             {t("hero.headline")}{" "}
             <span className="gradient-text">{t("hero.headline.highlight")}</span>{" "}
-            {t("hero.headline.end")}
+           
           </h1>
 
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-balance">
@@ -57,9 +58,9 @@ export const Hero = () => {
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href="/resume">
+              <Link to="/resume">
                 {t("hero.cta.secondary")}
-              </a>
+              </Link>
             </Button>
           </motion.div>
         </motion.div>
