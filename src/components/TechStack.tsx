@@ -2,11 +2,67 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import { ShoppingBag } from "lucide-react";
+
+import {
+  Html5Original,
+  Css3Original,
+  JavascriptOriginal,
+  TypescriptOriginal,
+  ReactOriginal,
+  VuejsOriginal,
+  NextjsOriginal,
+  NuxtjsOriginalWordmark,
+  WordpressOriginal,
+  WoocommerceOriginal,
+  GitOriginal,
+  FigmaOriginal,
+  TailwindcssOriginal,
+  PhpOriginal,
+  MysqlOriginal,
+  SupabaseOriginal,
+  VercelOriginal,
+  NetlifyOriginal,
+} from "devicons-react";
+
+const technologies = [
+  { name: "HTML5", icon: Html5Original },
+  { name: "CSS3", icon: Css3Original },
+  { name: "JavaScript", icon: JavascriptOriginal },
+  { name: "TypeScript", icon: TypescriptOriginal },
+  { name: "React", icon: ReactOriginal },
+  { name: "Vue.js", icon: VuejsOriginal },
+  { name: "Next.js", icon: NextjsOriginal },
+  { name: "Nuxt.js", icon: NuxtjsOriginalWordmark },
+  { name: "WordPress", icon: WordpressOriginal },
+  { name: "WooCommerce", icon: WoocommerceOriginal },
+  { name: "Shopify", icon: ShoppingBag },
+  { name: "Git", icon: GitOriginal },
+  { name: "Figma", icon: FigmaOriginal },
+  { name: "Tailwind CSS", icon: TailwindcssOriginal },
+  { name: "PHP", icon: PhpOriginal },
+  { name: "MySQL", icon: MysqlOriginal },
+  { name: "Supabase", icon: SupabaseOriginal },
+  { name: "Vercel", icon: VercelOriginal },
+  { name: "Netlify", icon: NetlifyOriginal },
+];
 
 export const TechStack = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { t } = useLanguage();
+  const swiperRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    swiperRef.current?.autoplay.stop();
+  };
+
+  const handleMouseLeave = () => {
+    swiperRef.current?.autoplay.start();
+  };
 
   return (
     <section id="stack" className="section-padding bg-secondary/30" ref={ref}>
@@ -33,43 +89,48 @@ export const TechStack = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          className="relative"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <div className="glass-card p-6 rounded-2xl">
-            <h3 className="text-sm font-semibold mb-3 text-primary">Core</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>HTML5</li>
-              <li>CSS/SCSS</li>
-              <li>JavaScript</li>
-              <li>TypeScript</li>
-            </ul>
-          </div>
-          <div className="glass-card p-6 rounded-2xl">
-            <h3 className="text-sm font-semibold mb-3 text-primary">Frameworks</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>React</li>
-              <li>Vue.js</li>
-              <li>Nuxt.js</li>
-              <li>Next.js</li>
-            </ul>
-          </div>
-          <div className="glass-card p-6 rounded-2xl">
-            <h3 className="text-sm font-semibold mb-3 text-primary">CMS / Ecommerce</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>WordPress</li>
-              <li>WooCommerce</li>
-              <li>Shopify</li>
-            </ul>
-          </div>
-          <div className="glass-card p-6 rounded-2xl">
-            <h3 className="text-sm font-semibold mb-3 text-primary">Herramientas</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Git</li>
-              <li>Figma</li>
-              <li>Tailwind CSS</li>
-              <li>PHP</li>
-            </ul>
-          </div>
+          <Swiper
+            ref={swiperRef}
+            modules={[Autoplay]}
+            autoplay={{
+              delay: 0,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            speed={4000}
+            loop={true}
+            slidesPerView="auto"
+            spaceBetween={40}
+            freeMode={true}
+            allowTouchMove={true}
+            breakpoints={{
+              320: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              640: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+              },
+              1024: {
+                slidesPerView: 6,
+                spaceBetween: 40,
+              },
+            }}
+          >
+            {technologies.map((tech, index) => (
+              <SwiperSlide key={index} className="!w-auto">
+                <div className="flex flex-col items-center justify-center gap-3 glass-card p-6 rounded-2xl min-w-[120px] hover:scale-105 transition-transform cursor-grab">
+                  <tech.icon size={40} className="text-primary" />
+                  <span className="text-sm text-muted-foreground">{tech.name}</span>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </motion.div>
       </div>
     </section>

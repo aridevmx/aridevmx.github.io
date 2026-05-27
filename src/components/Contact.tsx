@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Github, Linkedin, Mail, FileText } from "lucide-react";
+import { Github, Linkedin, Mail, FileText, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +15,7 @@ export const Contact = () => {
   const { toast } = useToast();
 
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
@@ -39,6 +40,11 @@ export const Contact = () => {
       icon: FileText,
       label: language === "es" ? "CV en PDF" : "PDF résumé",
       href: "/resume",
+    },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      href: "https://wa.me/523311153802",
     },
   ];
 
@@ -89,11 +95,12 @@ export const Contact = () => {
                 const res = await fetch("/api/crm", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ name, email, message }),
+                  body: JSON.stringify({ name, phone, email, message }),
                 });
                 const data = await res.json();
                 if (!res.ok) throw new Error(data?.error ?? "Error enviando mensaje");
                 setName("");
+                setPhone("");
                 setEmail("");
                 setMessage("");
                 toast({ title: t("contact.success"), description: t("contact.success.desc") });
@@ -111,9 +118,13 @@ export const Contact = () => {
                 <Input value={name} onChange={(e) => setName(e.target.value)} required />
               </div>
               <div className="space-y-2">
-                <div className="text-sm font-medium">{t("contact.email")}</div>
-                <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
+                <div className="text-sm font-medium">{t("contact.phone")}</div>
+                <Input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" />
               </div>
+            </div>
+            <div className="space-y-2">
+              <div className="text-sm font-medium">{t("contact.email")}</div>
+              <Input value={email} onChange={(e) => setEmail(e.target.value)} type="email" required />
             </div>
             <div className="space-y-2">
               <div className="text-sm font-medium">{t("contact.message")}</div>

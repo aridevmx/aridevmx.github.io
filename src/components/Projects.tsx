@@ -25,10 +25,25 @@ export const Projects = () => {
   useEffect(() => {
     let cancelled = false;
 
-    (async () => {
+    const fetchProjects = async () => {
       try {
-        const res = await fetch("/api/projects", { method: "GET" });
+        const token = import.meta.env.VITE_AIRTABLE_TOKEN;
+        const baseId = import.meta.env.VITE_AIRTABLE_BASE_ID;
+        const tableName = import.meta.env.VITE_AIRTABLE_PROJECTS_TABLE ?? "Projects";
+        
+        const isDevWithAirtable = import.meta.env.DEV && token && baseId;
+        
+        const url = isDevWithAirtable 
+          ? `https://api.airtable.com/v0/${baseId}/${tableName}?pageSize=20&filterByFormula={status}="delivered"`
+          : "/api/projects";
+        
+        const headers: HeadersInit = isDevWithAirtable 
+          ? { "Authorization": `Bearer ${token}` }
+          : {};
+
+        const res = await fetch(url, { method: "GET", headers });
         const data = await res.json();
+        
         if (!res.ok) throw new Error(data?.error ?? "Error cargando proyectos");
 
         const asRecord = (value: unknown): Record<string, unknown> | null =>
@@ -39,17 +54,29 @@ export const Projects = () => {
           return value.filter((x): x is string => typeof x === "string").map((x) => x.trim()).filter(Boolean);
         };
 
-        const projects = Array.isArray(data?.projects) ? (data.projects as unknown[]) : [];
+        const projects = isDev 
+          ? (data?.records ?? []).map((r: { fields: Record<string, unknown> }) => r.fields)
+          : (data?.projects ?? []);
+
+        let projectIndex = 0;
         const mapped: ProjectCardData[] = projects
-          .map((p) => {
+          .map((p: unknown) => {
             const record = asRecord(p);
             if (!record) return null;
 
+            projectIndex++;
             const id = String(record.id ?? "");
             const name = String(record.name ?? "");
             const category = String(record.category ?? "");
             const publishedAt = String(record.publishedAt ?? "");
-            const image = String(record.image ?? "");
+            
+            let image = "";
+            if (Array.isArray(record.image) && record.image.length > 0) {
+              image = String(record.image[0].url ?? "");
+            } else if (typeof record.image === "string") {
+              image = String(record.image);
+            }
+            
             const demoUrl = String(record.demoUrl ?? "");
             const githubUrl = typeof record.githubUrl === "string" ? record.githubUrl : null;
             const technologies = asStringArray(record.technologies);
@@ -58,22 +85,24 @@ export const Projects = () => {
             const status = statusValue === "in_progress" || statusValue === "delivered" ? statusValue : "delivered";
             const client = typeof record.client === "string" ? record.client : null;
 
-            const summaryRecord = asRecord(record.summary);
-            const summary = language === "es" ? String(summaryRecord?.es ?? "") : String(summaryRecord?.en ?? "");
+            let description = "";
+            if (typeof record.description === "object" && record.description !== null) {
+              const descRecord = asRecord(record.description);
+              description = language === "es" ? String(descRecord?.es ?? "") : String(descRecord?.en ?? "");
+            } else if (language === "es") {
+              description = String(record.description_es ?? "");
+            } else {
+              description = String(record.description_en ?? record.description_es ?? "");
+            }
 
-            const detailsRecord = asRecord(record.details);
-            const localizedDetails = detailsRecord ? asRecord(detailsRecord[language]) : null;
-            const details = localizedDetails ? localizedDetails : undefined;
-
-            if (!id || !name || !category || !summary) return null;
+            if (!name || !description) return null;
 
             return {
-              id,
+              id: id || `project-${projectIndex}`,
               name,
               client,
               category,
-              summary,
-              details,
+              description,
               technologies,
               languages: languagesList,
               demoUrl,
@@ -81,7 +110,7 @@ export const Projects = () => {
               status,
               publishedAt,
               image,
-            } satisfies ProjectCardData;
+            } as ProjectCardData;
           })
           .filter((x): x is ProjectCardData => x !== null);
 
@@ -92,7 +121,9 @@ export const Projects = () => {
       } catch (err) {
         if (!cancelled) setRemoteError(err instanceof Error ? err.message : String(err));
       }
-    })();
+    };
+
+    fetchProjects();
 
     return () => {
       cancelled = true;
@@ -142,9 +173,10 @@ export const Projects = () => {
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={project.name}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                 <span className="absolute bottom-4 left-4 text-xs font-medium px-3 py-1 rounded-full bg-primary/20 text-primary border border-primary/30">
                   {project.category}
@@ -159,24 +191,7 @@ export const Projects = () => {
                 </h3>
 
                 <div className="space-y-3 text-sm">
-                  <p className="text-foreground/80">{project.summary}</p>
-                  {project.details?.problem && (
-                    <div>
-                      <span className="text-muted-foreground">{language === "es" ? "Problema" : "Problem"}: </span>
-                      <span className="text-foreground/80">{project.details.problem}</span>
-                    </div>
-                  )}
-                  {project.details?.solution && (
-                    <div>
-                      <span className="text-muted-foreground">{language === "es" ? "Solución" : "Solution"}: </span>
-                      <span className="text-foreground/80">{project.details.solution}</span>
-                    </div>
-                  )}
-                  {project.details?.result && (
-                    <div className="pt-2">
-                      <span className="text-primary font-medium">{project.details.result}</span>
-                    </div>
-                  )}
+                  <p className="text-foreground/80" dangerouslySetInnerHTML={{ __html: project.description }} />
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/50">

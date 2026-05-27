@@ -9,19 +9,6 @@ const LocalizedStringSchema = z.object({
   en: nonEmptyString,
 });
 
-const LocalizedShortStringSchema = z.object({
-  es: z.string().min(1).max(150),
-  en: z.string().min(1).max(150),
-});
-
-const ProjectDetailsSchema = z
-  .object({
-    problem: nonEmptyString,
-    solution: nonEmptyString,
-    result: nonEmptyString,
-  })
-  .partial();
-
 const ProjectAccessCipherSchema = z.object({
   kdf: z.literal("pbkdf2-sha256"),
   iterations: z.number().int().min(100000),
@@ -46,8 +33,7 @@ const ProjectDefinitionSchema = z.object({
   name: nonEmptyString,
   client: nonEmptyString.nullable(),
   category: nonEmptyString,
-  summary: LocalizedShortStringSchema,
-  details: z.object({ es: ProjectDetailsSchema, en: ProjectDetailsSchema }).optional(),
+  description: LocalizedStringSchema,
   technologies: z.array(nonEmptyString).min(1),
   languages: z.array(nonEmptyString).min(1),
   demoUrl: z.string().url(),

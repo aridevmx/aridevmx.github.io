@@ -8,12 +8,7 @@ export type ProjectCardData = {
   name: string;
   client: string | null;
   category: string;
-  summary: string;
-  details?: {
-    problem?: string;
-    solution?: string;
-    result?: string;
-  };
+  description: string;
   technologies: string[];
   languages: string[];
   demoUrl: string;
@@ -41,8 +36,7 @@ export const getProjectsForLanguage = (language: Language): ProjectCardData[] =>
       name: p.name,
       client: p.client,
       category: p.category,
-      summary: getLocalizedValue(p.summary, language),
-      details: p.details ? p.details[language] : undefined,
+      description: getLocalizedValue(p.description, language),
       image: p.image,
       technologies: p.technologies,
       languages: p.languages,

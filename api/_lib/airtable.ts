@@ -86,6 +86,7 @@ export const updateRecord = async <TFields extends Record<string, unknown>>(tabl
 
 export const formula = {
   and: (...parts: string[]) => `AND(${parts.join(",")})`,
+  or: (...parts: string[]) => `OR(${parts.join(",")})`,
   eq: (field: string, value: string) => `{${field}}=${encodeFormulaValue(value)}`,
   isTrue: (field: string) => `{${field}}=TRUE()`,
 };

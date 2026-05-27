@@ -4,19 +4,12 @@ import { airtableTableUrl, createRecord, updateRecord, formula } from "../_lib/a
 
 type Localized<T> = { es: T; en: T };
 
-type ProjectDetails = {
-  problem?: string;
-  solution?: string;
-  result?: string;
-};
-
 type Project = {
   id: string;
   name: string;
   client: string | null;
   category: string;
-  summary: Localized<string>;
-  details?: Localized<ProjectDetails>;
+  description: Localized<string>;
   technologies: string[];
   languages: string[];
   demoUrl: string;
@@ -47,51 +40,43 @@ const toIsoDate = (value: string) => {
 };
 
 const toProject = (fields: AirtableProjectFields): Project | null => {
-  const id = String(fields.id ?? "").trim();
-  if (!isUuid(id)) return null;
+  const id = String(fields.id ?? "").trim() || crypto.randomUUID();
 
-  const publishedAt = String(fields.publishedAt ?? "").trim();
-  if (!toIsoDate(publishedAt)) return null;
+  const publishedAt = String(fields.publishedAt ?? "").trim() || new Date().toISOString().split("T")[0];
 
-  const status = String(fields.status ?? "").trim();
-  if (status !== "in_progress" && status !== "delivered") return null;
+  const status = String(fields.status ?? "").trim() || "delivered";
 
   const name = String(fields.name ?? "").trim();
-  const category = String(fields.category ?? "").trim();
-  const summaryEs = String(fields.summary_es ?? "").trim();
-  const summaryEn = String(fields.summary_en ?? "").trim();
-  const demoUrl = String(fields.demoUrl ?? "").trim();
-  const image = String(fields.image ?? "").trim();
-  if (!name || !category || !summaryEs || !summaryEn || !demoUrl || !image) return null;
+  if (!name) return null;
 
-  const details: Localized<ProjectDetails> | undefined =
-    fields.problem_es || fields.solution_es || fields.result_es || fields.problem_en || fields.solution_en || fields.result_en
-      ? {
-          es: {
-            problem: fields.problem_es ? String(fields.problem_es) : undefined,
-            solution: fields.solution_es ? String(fields.solution_es) : undefined,
-            result: fields.result_es ? String(fields.result_es) : undefined,
-          },
-          en: {
-            problem: fields.problem_en ? String(fields.problem_en) : undefined,
-            solution: fields.solution_en ? String(fields.solution_en) : undefined,
-            result: fields.result_en ? String(fields.result_en) : undefined,
-          },
-        }
-      : undefined;
+  const category = String(fields.category ?? "").trim() || "Proyecto";
+  const descriptionEs = String(fields.description_es ?? "").trim();
+  const descriptionEn = String(fields.description_en ?? "").trim();
+  const demoUrl = String(fields.demoUrl ?? "").trim();
+  
+  let image = "";
+  if (Array.isArray(fields.image) && fields.image.length > 0) {
+    image = String(fields.image[0].url ?? "");
+  } else if (typeof fields.image === "string") {
+    image = String(fields.image).trim();
+  }
+  if (!image) {
+    image = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop";
+  }
+
+  if (!descriptionEs && !descriptionEn) return null;
 
   return {
     id,
     name,
     client: fields.client ? String(fields.client) : null,
     category,
-    summary: { es: summaryEs, en: summaryEn },
-    details,
+    description: { es: descriptionEs || descriptionEn, en: descriptionEn || descriptionEs },
     technologies: splitList(fields.technologies),
     languages: splitList(fields.languages),
     demoUrl,
     githubUrl: fields.githubUrl ? String(fields.githubUrl) : null,
-    status,
+    status: status === "in_progress" ? "in_progress" : "delivered",
     publishedAt,
     image,
     access: null,
@@ -100,18 +85,12 @@ const toProject = (fields: AirtableProjectFields): Project | null => {
 
 const toAirtableFields = (project: Project) => {
   return {
-    id: project.id,
+    id: project.id || crypto.randomUUID(),
     name: project.name,
     client: project.client,
     category: project.category,
-    summary_es: project.summary.es,
-    summary_en: project.summary.en,
-    problem_es: project.details?.es?.problem ?? null,
-    solution_es: project.details?.es?.solution ?? null,
-    result_es: project.details?.es?.result ?? null,
-    problem_en: project.details?.en?.problem ?? null,
-    solution_en: project.details?.en?.solution ?? null,
-    result_en: project.details?.en?.result ?? null,
+    description_es: project.description.es,
+    description_en: project.description.en,
     technologies: project.technologies,
     languages: project.languages,
     demoUrl: project.demoUrl,
@@ -126,7 +105,7 @@ const listProjects = async (includeDrafts: boolean) => {
   const url = new URL(airtableTableUrl(tableName()));
   url.searchParams.set("pageSize", "100");
   if (!includeDrafts) {
-    url.searchParams.set("filterByFormula", formula.eq("status", "delivered"));
+    url.searchParams.set("filterByFormula", `{status}="delivered"`);
   }
 
   const records: AirtableProjectFields[] = [];
@@ -151,7 +130,7 @@ const listProjects = async (includeDrafts: boolean) => {
 const findProjectRecordIdByUuid = async (uuid: string) => {
   const url = new URL(airtableTableUrl(tableName()));
   url.searchParams.set("maxRecords", "1");
-  url.searchParams.set("filterByFormula", formula.eq("id", uuid));
+  url.searchParams.set("filterByFormula", formula.eq("name", uuid));
   const res = await fetch(url.toString(), { headers: { Authorization: `Bearer ${process.env.AIRTABLE_TOKEN ?? ""}` } });
   const text = await res.text();
   const jsonRes = text ? JSON.parse(text) : null;
@@ -192,9 +171,8 @@ export default async function handler(req: Request) {
       const body = await readJson<{ project: Project }>(req);
       const project = body.project;
       if (!project || typeof project !== "object") return json(400, { error: "Body inválido" });
-      if (!isUuid(String(project.id ?? ""))) return json(400, { error: "id debe ser UUID" });
 
-      const recordId = await findProjectRecordIdByUuid(project.id);
+      const recordId = project.id ? await findProjectRecordIdByUuid(project.id) : null;
       const fields = toAirtableFields(project);
       if (recordId) await updateRecord(tableName(), recordId, fields);
       else await createRecord(tableName(), fields);
