@@ -18,17 +18,22 @@ const translations = {
     "nav.contact": "Contacto",
     
     // Hero
-    "hero.badge": "Abierto a nuevas oportunidades",
+    "hero.badge": "Disponible para contratar y nuevos proyectos",
     "hero.headline": "Frontend Developer para",
     "hero.headline.highlight": "productos digitales",
     "hero.headline.end": "",
     "hero.subheadline": "Desarrollo interfaces web con React, TypeScript y Vue. Experiencia en agencias digitales trabajando con WordPress, WooCommerce y Shopify.",
     "hero.cta.primary": "Ver proyectos",
-    "hero.cta.secondary": "Contactar",
+    "hero.cta.secondary": "Descargar CV",
+    "hero.cta.tertiary": "Trabajemos juntos",
     "hero.stats.years": "Años de experiencia",
     "hero.stats.projects": "Proyectos entregados",
     "hero.stats.clients": "Clientes satisfechos",
     "hero.scroll": "Scroll",
+    "hero.for": "Para reclutadores",
+    "hero.for.recruiters": "Revisa mi CV y experiencia profesional",
+    "hero.for.clients": "Para clientes",
+    "hero.for.clients.desc": "Explora proyectos y servicios",
     
     // About
     "about.label": "Sobre mí",
@@ -109,9 +114,13 @@ const translations = {
     
     // Contact
     "contact.label": "Contacto",
-    "contact.title": "¿Quieres contactarme?",
+    "contact.title": "¿Hablamos?",
     "contact.title.highlight": "",
-    "contact.subtitle": "Si tienes una vacante de Frontend o quieres saber más sobre mi experiencia, podemos hablar por LinkedIn, GitHub o email.",
+    "contact.subtitle": "¿Tienes una vacante de Frontend, un proyecto en mente o simplemente quieres conectar? Escríbeme por LinkedIn, email o mediante el formulario.",
+    "contact.reason": "Motivo de contacto",
+    "contact.reason.hire": "Vacante / Oportunidad laboral",
+    "contact.reason.project": "Proyecto / Colaboración",
+    "contact.reason.other": "Otro",
     "contact.name": "Nombre",
     "contact.phone": "Teléfono",
     "contact.email": "Email",
@@ -122,6 +131,12 @@ const translations = {
     
     // Footer
     "footer.rights": "Todos los derechos reservados.",
+
+    // CTA Banner
+    "cta.title": "¿Listo para trabajar juntos?",
+    "cta.subtitle": "Ya sea que busques un Frontend Developer para tu equipo o necesites ayuda con un proyecto, estoy abierto a escuchar.",
+    "cta.button": "Contáctame",
+    "cta.button.cv": "Ver CV",
   },
   en: {
     // Navbar
@@ -132,17 +147,22 @@ const translations = {
     "nav.contact": "Contact",
     
     // Hero
-    "hero.badge": "Open to work",
+    "hero.badge": "Available for hire & new projects",
     "hero.headline": "Frontend Developer for",
     "hero.headline.highlight": "digital products",
     "hero.headline.end": "",
     "hero.subheadline": "I build web interfaces with React, TypeScript, and Vue. Experience in digital agencies working with WordPress, WooCommerce, and Shopify.",
     "hero.cta.primary": "View projects",
-    "hero.cta.secondary": "Contact",
+    "hero.cta.secondary": "Download CV",
+    "hero.cta.tertiary": "Let's work together",
     "hero.stats.years": "Years of experience",
     "hero.stats.projects": "Projects delivered",
     "hero.stats.clients": "Satisfied clients",
     "hero.scroll": "Scroll",
+    "hero.for": "For recruiters",
+    "hero.for.recruiters": "Check my CV and professional experience",
+    "hero.for.clients": "For clients",
+    "hero.for.clients.desc": "Explore projects and services",
     
     // About
     "about.label": "About me",
@@ -223,9 +243,13 @@ const translations = {
     
     // Contact
     "contact.label": "Contact",
-    "contact.title": "Want to contact me?",
+    "contact.title": "Let's talk?",
     "contact.title.highlight": "",
-    "contact.subtitle": "If you have a Frontend role or want to know more about my experience, you can reach me via LinkedIn, GitHub or email.",
+    "contact.subtitle": "Have a Frontend role, a project in mind, or just want to connect? Reach out via LinkedIn, email, or the form below.",
+    "contact.reason": "Reason for contact",
+    "contact.reason.hire": "Job opportunity / Hiring",
+    "contact.reason.project": "Project / Collaboration",
+    "contact.reason.other": "Other",
     "contact.name": "Name",
     "contact.phone": "Phone",
     "contact.email": "Email",
@@ -236,6 +260,12 @@ const translations = {
     
     // Footer
     "footer.rights": "All rights reserved.",
+
+    // CTA Banner
+    "cta.title": "Ready to work together?",
+    "cta.subtitle": "Whether you're looking for a Frontend Developer for your team or need help with a project, I'm open to hearing about it.",
+    "cta.button": "Get in touch",
+    "cta.button.cv": "View résumé",
   },
 };
 

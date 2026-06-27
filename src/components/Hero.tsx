@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, FileText, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
@@ -49,19 +49,38 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col items-center gap-6"
           >
-            <Button size="lg" asChild className="group">
-              <a href="#projects">
-                {t("hero.cta.primary")}
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/resume">
-                {t("hero.cta.secondary")}
-              </Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button size="lg" asChild className="group">
+                <a href="#projects">
+                  {t("hero.cta.primary")}
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </a>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/resume">
+                  <FileText className="mr-2 h-4 w-4" />
+                  {t("hero.cta.secondary")}
+                </Link>
+              </Button>
+              <Button variant="secondary" size="lg" asChild>
+                <a href="#contact">
+                  <Send className="mr-2 h-4 w-4" />
+                  {t("hero.cta.tertiary")}
+                </a>
+              </Button>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                {t("hero.for.recruiters")}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                {t("hero.for.clients.desc")}
+              </span>
+            </div>
           </motion.div>
         </motion.div>
 

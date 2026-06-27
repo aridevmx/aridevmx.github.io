@@ -18,6 +18,7 @@ export const Contact = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [reason, setReason] = useState("");
   const [sending, setSending] = useState(false);
 
   const socialLinks = [
@@ -86,32 +87,47 @@ export const Contact = () => {
             ))}
           </div>
 
-          <form
-            className="mt-10 text-left space-y-4"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              setSending(true);
-              try {
-                const res = await fetch("/api/crm", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ name, phone, email, message }),
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data?.error ?? "Error enviando mensaje");
-                setName("");
-                setPhone("");
-                setEmail("");
-                setMessage("");
-                toast({ title: t("contact.success"), description: t("contact.success.desc") });
-              } catch (err) {
-                const msg = err instanceof Error ? err.message : String(err);
-                toast({ title: "Error", description: msg, variant: "destructive" });
-              } finally {
-                setSending(false);
-              }
-            }}
-          >
+              <form
+                className="mt-10 text-left space-y-4"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setSending(true);
+                  try {
+                    const res = await fetch("/api/crm", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ name, phone, email, message, reason }),
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data?.error ?? "Error enviando mensaje");
+                    setName("");
+                    setPhone("");
+                    setEmail("");
+                    setMessage("");
+                    setReason("");
+                    toast({ title: t("contact.success"), description: t("contact.success.desc") });
+                  } catch (err) {
+                    const msg = err instanceof Error ? err.message : String(err);
+                    toast({ title: "Error", description: msg, variant: "destructive" });
+                  } finally {
+                    setSending(false);
+                  }
+                }}
+              >
+            <div className="space-y-2">
+              <div className="text-sm font-medium">{t("contact.reason")}</div>
+              <select
+                value={reason}
+                onChange={(e) => setReason(e.target.value)}
+                className="flex h-10 w-full rounded-lg border border-border/50 bg-card px-3 py-2 text-sm text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                required
+              >
+                <option value="" disabled>{language === "es" ? "Selecciona una opción" : "Select an option"}</option>
+                <option value="hire">{t("contact.reason.hire")}</option>
+                <option value="project">{t("contact.reason.project")}</option>
+                <option value="other">{t("contact.reason.other")}</option>
+              </select>
+            </div>
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-2">
                 <div className="text-sm font-medium">{t("contact.name")}</div>

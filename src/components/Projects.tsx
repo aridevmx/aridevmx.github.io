@@ -54,7 +54,7 @@ export const Projects = () => {
           return value.filter((x): x is string => typeof x === "string").map((x) => x.trim()).filter(Boolean);
         };
 
-        const projects = isDev 
+        const projects = isDevWithAirtable 
           ? (data?.records ?? []).map((r: { fields: Record<string, unknown> }) => r.fields)
           : (data?.projects ?? []);
 

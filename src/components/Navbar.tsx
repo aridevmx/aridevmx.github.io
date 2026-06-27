@@ -12,8 +12,10 @@ export const Navbar = () => {
 
   const navLinks = [
     { href: "#about", label: t("nav.about") },
+    { href: "#services", label: t("nav.services") },
     { href: "#projects", label: t("nav.projects") },
-    { href: "#stack", label: "Stack" },
+    { href: "#process", label: t("nav.process") },
+    { href: "#contact", label: t("nav.contact") },
   ];
 
   useEffect(() => {
@@ -56,13 +58,11 @@ export const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-2">
           <LanguageSwitcher />
-          <Button variant="ghost" size="icon" asChild aria-label="Ver CV">
+          <Button variant="outline" size="sm" asChild>
             <a href="/resume" target="_blank" rel="noopener noreferrer">
-              <FileText className="h-5 w-5" />
+              <FileText className="mr-1.5 h-4 w-4" />
+              {t("hero.cta.secondary")}
             </a>
-          </Button>
-          <Button asChild>
-            <a href="#contact">{t("nav.contact")}</a>
           </Button>
         </div>
 
@@ -99,14 +99,10 @@ export const Navbar = () => {
             <li className="pt-2 flex items-center justify-between">
               <LanguageSwitcher />
               <div className="flex gap-2">
-                <Button variant="ghost" size="icon" asChild aria-label="Ver CV">
+                <Button variant="outline" size="sm" asChild>
                   <a href="/resume" target="_blank" rel="noopener noreferrer">
-                    <FileText className="h-5 w-5" />
-                  </a>
-                </Button>
-                <Button asChild>
-                  <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                    {t("nav.contact")}
+                    <FileText className="mr-1.5 h-4 w-4" />
+                    {t("hero.cta.secondary")}
                   </a>
                 </Button>
               </div>
