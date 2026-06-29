@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { ProjectCard } from './ProjectCard'
 import type { Project } from '@/lib/airtable'
+import { T } from './T'
 
 const INITIAL_COUNT = 4
 
@@ -23,9 +24,9 @@ export function ProjectsClient({ projects }: { projects: Project[] }) {
         <div className="mt-8 text-center">
           <button
             onClick={() => setShowAll(true)}
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[#1E1E2E] text-[#C8C8D8] text-[14px] font-body rounded-lg hover:border-[#8B5CF6] transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 border border-edge text-body text-[14px] font-body rounded-lg hover:border-accent transition-colors"
           >
-            Ver más proyectos ({projects.length - INITIAL_COUNT})
+            <T k="projects.viewMore" /> ({projects.length - INITIAL_COUNT})
           </button>
         </div>
       )}

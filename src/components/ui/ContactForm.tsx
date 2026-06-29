@@ -3,6 +3,7 @@
 import { useRef, useState, useTransition } from 'react'
 import { sendContactAction } from '@/app/actions'
 import { Send, Loader2, CheckCircle2, AlertCircle } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -11,6 +12,7 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [, startTransition] = useTransition()
+  const { t } = useLanguage()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -22,7 +24,7 @@ export function ContactForm() {
 
     if (!name || !email || !message) {
       setStatus('error')
-      setErrorMsg('Completa todos los campos.')
+      setErrorMsg(t('form.error.fields'))
       return
     }
 
@@ -35,16 +37,16 @@ export function ContactForm() {
         ref.current?.reset()
       } else {
         setStatus('error')
-        setErrorMsg(result.error ?? 'Hubo un error. Intenta de nuevo.')
+        setErrorMsg(result.error ?? t('form.error.generic'))
       }
     })
   }
 
   if (status === 'success') {
     return (
-      <div className="flex items-center gap-2 text-[#8B5CF6] font-body text-[14px]">
+      <div className="flex items-center gap-2 text-accent font-body text-[14px]">
         <CheckCircle2 className="w-5 h-5" />
-        Mensaje enviado. Te respondo pronto.
+        {t('form.success')}
       </div>
     )
   }
@@ -54,41 +56,41 @@ export function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <input
           name="name"
-          placeholder="Nombre"
+          placeholder={t('form.name')}
           required
-          className="w-full px-4 py-3 bg-[#111118] border border-[#1E1E2E] rounded-lg text-[#F0F0F8] text-[14px] font-body placeholder:text-[#7C7C94] focus:outline-none focus:border-[#8B5CF6] transition-colors"
+          className="w-full px-4 py-3 bg-surface border border-edge rounded-lg text-heading text-[14px] font-body placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
         />
         <input
           name="email"
           type="email"
-          placeholder="Email"
+          placeholder={t('form.email')}
           required
-          className="w-full px-4 py-3 bg-[#111118] border border-[#1E1E2E] rounded-lg text-[#F0F0F8] text-[14px] font-body placeholder:text-[#7C7C94] focus:outline-none focus:border-[#8B5CF6] transition-colors"
+          className="w-full px-4 py-3 bg-surface border border-edge rounded-lg text-heading text-[14px] font-body placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
         />
       </div>
       <textarea
         name="message"
-        placeholder="Mensaje"
+        placeholder={t('form.message')}
         rows={4}
         required
-        className="w-full px-4 py-3 bg-[#111118] border border-[#1E1E2E] rounded-lg text-[#F0F0F8] text-[14px] font-body placeholder:text-[#7C7C94] focus:outline-none focus:border-[#8B5CF6] transition-colors resize-none"
+        className="w-full px-4 py-3 bg-surface border border-edge rounded-lg text-heading text-[14px] font-body placeholder:text-muted focus:outline-none focus:border-accent transition-colors resize-none"
       />
 
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="inline-flex items-center gap-2 px-6 py-3 bg-[#8B5CF6] text-white text-[14px] font-body font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
+        className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white text-[14px] font-body font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
       >
         {status === 'loading' ? (
           <Loader2 className="w-4 h-4 animate-spin" />
         ) : (
           <Send className="w-4 h-4" />
         )}
-        Enviar mensaje
+        {t('form.send')}
       </button>
 
       {status === 'error' && (
-        <p className="flex items-center gap-1.5 text-[#F87171] text-[13px] font-mono">
+        <p className="flex items-center gap-1.5 text-error text-[13px] font-mono">
           <AlertCircle className="w-4 h-4" />
           {errorMsg}
         </p>

@@ -4,25 +4,38 @@
 
 @layer base {
   :root {
+    --ink: #FAFAFA;
+    --surface: #FFFFFF;
+    --edge: #E5E7EB;
+    --muted: #9CA3AF;
+    --body: #374151;
+    --heading: #111827;
+    --accent: #8B5CF6;
+    --accent-dim: rgba(139, 92, 246, 0.08);
+    --accent-glow: rgba(139, 92, 246, 0.15);
+    --error: #EF4444;
+    --max-w: 1100px;
+    --section-gap: 140px;
+    --card-radius: 12px;
+  }
+
+  .dark {
     --ink: #0A0A0F;
     --surface: #111118;
-    --border: #1E1E2E;
+    --edge: #1E1E2E;
     --muted: #7C7C94;
     --body: #C8C8D8;
-    --white: #F0F0F8;
+    --heading: #F0F0F8;
     --accent: #8B5CF6;
     --accent-dim: rgba(139, 92, 246, 0.08);
     --accent-glow: rgba(139, 92, 246, 0.15);
     --error: #F87171;
-    --max-w: 1100px;
-    --section-gap: 140px;
-    --card-radius: 12px;
   }
 }
 
 @layer base {
   * {
-    @apply border-[#1E1E2E];
+    @apply border-edge;
   }
 
   html {
@@ -31,7 +44,7 @@
   }
 
   body {
-    @apply bg-[#0A0A0F] text-[#C8C8D8] antialiased;
+    @apply bg-ink text-body antialiased;
   }
 }
 

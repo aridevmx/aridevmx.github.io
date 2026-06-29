@@ -34,11 +34,11 @@ export function TechTag({ label }: { label: string }) {
   const Icon = iconMap[label]
 
   return (
-    <span className="inline-flex items-center gap-1.5 px-[10px] py-[4px] text-[13px] font-mono text-[#C8C8D8] bg-[rgba(139,92,246,0.08)] border border-[#1E1E2E] rounded-[6px] hover:border-[#8B5CF6] transition-colors duration-150">
+    <span className="inline-flex items-center gap-1.5 px-[10px] py-[4px] text-[13px] font-mono text-body bg-accent-dim border border-edge rounded-[6px] hover:border-accent transition-colors duration-150">
       {Icon ? (
         <Icon size={14} />
       ) : (
-        <span className="w-[6px] h-[6px] rounded-sm bg-[#7C7C94] shrink-0" />
+        <span className="w-[6px] h-[6px] rounded-sm bg-muted shrink-0" />
       )}
       {label}
     </span>

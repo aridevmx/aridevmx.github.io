@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { Space_Grotesk, Inter, JetBrains_Mono } from 'next/font/google'
+import { ThemeProvider } from 'next-themes'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 import './globals.css'
 
 const spaceGrotesk = Space_Grotesk({
@@ -26,13 +28,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Ariel Loza — Frontend Developer',
   description:
-    'Frontend Developer con 9+ años en React, TypeScript y WordPress. Disponible para posiciones y proyectos desde Guadalajara, MX.',
+    'Frontend Developer with 9+ years in React, TypeScript and WordPress. Available for positions and projects from Guadalajara, MX.',
   openGraph: {
     title: 'Ariel Loza — Frontend Developer',
     description:
-      'Frontend Developer con visión de producto. React, TypeScript, WordPress, Supabase.',
+      'Frontend Developer with product vision. React, TypeScript, WordPress, Supabase.',
     images: [{ url: '/og/og-image.png', width: 1200, height: 630 }],
-    locale: 'es_MX',
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
@@ -48,8 +50,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable}`}>
-      <body className="font-body">{children}</body>
+    <html lang="en" suppressHydrationWarning className={`${spaceGrotesk.variable} ${inter.variable} ${jetBrainsMono.variable}`}>
+      <body className="font-body">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
+      </body>
     </html>
   )
 }

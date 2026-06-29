@@ -1,6 +1,7 @@
 import { getProjects } from '@/lib/airtable'
 import { SectionLabel } from '@/components/ui/SectionLabel'
 import { ProjectsClient } from '@/components/ui/ProjectsClient'
+import { T } from '@/components/ui/T'
 
 export async function Projects() {
   let projects
@@ -25,9 +26,9 @@ export async function Projects() {
 
   return (
     <section id="projects" className="max-w-[1100px] mx-auto px-4 sm:px-6 py-[140px] scroll-mt-20">
-      <SectionLabel>Proyectos</SectionLabel>
-      <h2 className="font-display text-[32px] sm:text-[42px] font-semibold text-[#F0F0F8] mt-1">
-        Trabajo reciente
+      <SectionLabel><T k="projects.label" /></SectionLabel>
+      <h2 className="font-display text-[32px] sm:text-[42px] font-semibold text-heading mt-1">
+        <T k="projects.title" />
       </h2>
       <ProjectsClient projects={delivered} />
     </section>

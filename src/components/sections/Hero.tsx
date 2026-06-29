@@ -2,9 +2,11 @@
 
 import { useEffect, useRef } from 'react'
 import { ArrowDown, Download } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export function Hero() {
   const bgRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const bg = bgRef.current
@@ -37,25 +39,25 @@ export function Hero() {
 
       <div className="relative z-10 max-w-[1100px] mx-auto px-4 sm:px-6 pt-20 text-center">
         <div className="hero-name">
-          <h1 className="font-display text-[40px] sm:text-[64px] font-bold leading-[1.1] text-[#F0F0F8]">
+          <h1 className="font-display text-[40px] sm:text-[64px] font-bold leading-[1.1] text-heading">
             Ariel Loza
           </h1>
         </div>
 
         <div className="hero-role mt-2">
           <h1 className="font-display text-[32px] sm:text-[48px] font-bold leading-[1.1]">
-            <span className="text-[#8B5CF6]">Frontend Developer</span>
+            <span className="text-accent">Frontend Developer</span>
           </h1>
         </div>
 
         <div className="hero-role mt-1">
-          <h1 className="font-display text-[32px] sm:text-[48px] font-bold leading-[1.1] text-[#F0F0F8]">
-            con visión de producto.
+          <h1 className="font-display text-[32px] sm:text-[48px] font-bold leading-[1.1] text-heading">
+            {t('hero.vision')}
           </h1>
         </div>
 
         <div className="hero-stack mt-6">
-          <p className="font-body text-[14px] sm:text-[16px] text-[#7C7C94]">
+          <p className="font-body text-[14px] sm:text-[16px] text-muted">
             React<span className="mx-1.5">·</span>TypeScript<span className="mx-1.5">·</span>Vue
             <br className="sm:hidden" />
             <span className="hidden sm:inline mx-1.5">·</span>
@@ -64,28 +66,28 @@ export function Hero() {
         </div>
 
         <div className="hero-available mt-4">
-          <span className="inline-flex items-center gap-2 font-mono text-[13px] text-[#7C7C94]">
+          <span className="inline-flex items-center gap-2 font-mono text-[13px] text-muted">
             <span className="relative flex w-2 h-2">
-              <span className="absolute inset-0 rounded-full bg-[#8B5CF6] animate-ping opacity-75" />
-              <span className="relative rounded-full w-2 h-2 bg-[#8B5CF6]" />
+              <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-75" />
+              <span className="relative rounded-full w-2 h-2 bg-accent" />
             </span>
-            Disponible — Guadalajara, MX
+            {t('hero.available')}
           </span>
         </div>
 
         <div className="hero-ctas mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#8B5CF6] text-white text-[14px] font-body font-medium rounded-lg hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white text-[14px] font-body font-medium rounded-lg hover:opacity-90 transition-opacity"
           >
-            Ver proyectos
+            {t('hero.viewProjects')}
             <ArrowDown className="w-4 h-4" />
           </a>
           <a
             href="/cv"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[#1E1E2E] text-[#C8C8D8] text-[14px] font-body font-medium rounded-lg hover:border-[#8B5CF6] transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 border border-edge text-body text-[14px] font-body font-medium rounded-lg hover:border-accent transition-colors"
           >
-            Descargar CV
+            {t('hero.downloadCv')}
             <Download className="w-4 h-4" />
           </a>
         </div>

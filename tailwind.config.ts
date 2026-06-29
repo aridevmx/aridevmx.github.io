@@ -3,6 +3,7 @@ import tailwindcssAnimate from "tailwindcss-animate";
 import typography from "@tailwindcss/typography";
 
 export default {
+  darkMode: "class",
   content: [
     "./src/**/*.{ts,tsx}",
   ],
@@ -14,16 +15,16 @@ export default {
         mono: ["var(--font-mono)", "monospace"],
       },
       colors: {
-        ink: "#0A0A0F",
-        surface: "#111118",
-        border: "#1E1E2E",
-        muted: "#7C7C94",
-        body: "#C8C8D8",
-        white: "#F0F0F8",
-        accent: "#8B5CF6",
-        "accent-dim": "rgba(139, 92, 246, 0.08)",
-        "accent-glow": "rgba(139, 92, 246, 0.15)",
-        error: "#F87171",
+        ink: "var(--ink)",
+        surface: "var(--surface)",
+        edge: "var(--edge)",
+        muted: "var(--muted)",
+        body: "var(--body)",
+        heading: "var(--heading)",
+        accent: "var(--accent)",
+        "accent-dim": "var(--accent-dim)",
+        "accent-glow": "var(--accent-glow)",
+        error: "var(--error)",
       },
       maxWidth: {
         content: "1100px",
