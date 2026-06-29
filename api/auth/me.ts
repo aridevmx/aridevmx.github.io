@@ -1,5 +1,5 @@
-import { json } from "../_lib/http";
-import { getAdminSession } from "../_lib/adminAuth";
+import { json } from "../_lib/http.js";
+import { getAdminSession } from "../_lib/adminAuth.js";
 
 export const config = {
   runtime: "nodejs",

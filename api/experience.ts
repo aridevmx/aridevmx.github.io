@@ -1,5 +1,5 @@
-import { json } from "./_lib/http";
-import { listAllRecords } from "./_lib/airtable";
+import { json } from "./_lib/http.js";
+import { listAllRecords } from "./_lib/airtable.js";
 
 export type Experience = {
   id: string;

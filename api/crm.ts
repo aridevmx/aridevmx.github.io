@@ -1,5 +1,5 @@
-import { json, readJson, getClientIp } from "./_lib/http";
-import { createRecord } from "./_lib/airtable";
+import { json, readJson, getClientIp } from "./_lib/http.js";
+import { createRecord } from "./_lib/airtable.js";
 
 type Body = {
   name: string;

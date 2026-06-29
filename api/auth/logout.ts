@@ -1,5 +1,5 @@
-import { json } from "../_lib/http";
-import { serializeCookie } from "../_lib/session";
+import { json } from "../_lib/http.js";
+import { serializeCookie } from "../_lib/session.js";
 
 export const config = {
   runtime: "nodejs",

@@ -1,6 +1,6 @@
-import { json, readJson } from "../_lib/http";
-import { getAdminSession } from "../_lib/adminAuth";
-import { airtableTableUrl, createRecord, updateRecord, formula } from "../_lib/airtable";
+import { json, readJson } from "../_lib/http.js";
+import { getAdminSession } from "../_lib/adminAuth.js";
+import { airtableTableUrl, createRecord, updateRecord, formula } from "../_lib/airtable.js";
 
 type Localized<T> = { es: T; en: T };
 

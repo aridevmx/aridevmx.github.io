@@ -1,5 +1,5 @@
-import { json } from "./_lib/http";
-import { airtableTableUrl, formula } from "./_lib/airtable";
+import { json } from "./_lib/http.js";
+import { airtableTableUrl, formula } from "./_lib/airtable.js";
 
 type BlogPost = {
   id: string;
@@ -39,7 +39,7 @@ export default async function handler(req: Request) {
 
     const records = Array.isArray(jsonRes?.records) ? (jsonRes.records as unknown[]) : [];
     const posts: BlogPost[] = records
-      .map((r) => {
+      .map((r): BlogPost | null => {
         if (typeof r !== "object" || r === null) return null;
         const record = r as Record<string, unknown>;
         const fields = typeof record.fields === "object" && record.fields !== null ? (record.fields as Record<string, unknown>) : {};

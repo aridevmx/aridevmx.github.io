@@ -1,4 +1,4 @@
-import { parseCookies, verifySessionToken } from "./session";
+import { parseCookies, verifySessionToken } from "./session.js";
 
 export const getAdminSession = (req: Request) => {
   const cookies = parseCookies(req.headers.get("cookie") ?? undefined);

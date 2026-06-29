@@ -1,6 +1,6 @@
-import { json, readJson, getClientIp } from "../_lib/http";
-import { createSessionToken, serializeCookie } from "../_lib/session";
-import { airtableTableUrl, formula } from "../_lib/airtable";
+import { json, readJson, getClientIp } from "../_lib/http.js";
+import { createSessionToken, serializeCookie } from "../_lib/session.js";
+import { airtableTableUrl, formula } from "../_lib/airtable.js";
 
 type LoginBody = {
   token: string;
