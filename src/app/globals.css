@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ink: #0A0A0F;
+    --surface: #111118;
+    --border: #1E1E2E;
+    --muted: #7C7C94;
+    --body: #C8C8D8;
+    --white: #F0F0F8;
+    --accent: #8B5CF6;
+    --accent-dim: rgba(139, 92, 246, 0.08);
+    --accent-glow: rgba(139, 92, 246, 0.15);
+    --error: #F87171;
+    --max-w: 1100px;
+    --section-gap: 140px;
+    --card-radius: 12px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-[#1E1E2E];
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    @apply bg-[#0A0A0F] text-[#C8C8D8] antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

@@ -7,8 +7,8 @@ type BlogPost = {
   slug: string;
   excerpt: string;
   publishedAt: string;
-  coverImage?: string | null;
-  url?: string | null;
+  coverImage: string | null;
+  url: string | null;
 };
 
 const tableName = () => process.env.AIRTABLE_BLOG_TABLE ?? "blog";

@@ -23,7 +23,17 @@ dist-ssr
 *.sln
 *.sw?
 
+# Next.js
+.next/
+next-env.d.ts
+
 # Env files
 .env
 .env.*
 !.env.example
+
+# TypeScript
+*.tsbuildinfo
+
+# Vercel
+.vercel
